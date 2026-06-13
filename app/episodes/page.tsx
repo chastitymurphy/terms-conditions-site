@@ -1,0 +1,73 @@
+import { episodes } from '@/lib/data'
+import EpisodeCard from '@/components/EpisodeCard'
+import NewsletterCTA from '@/components/NewsletterCTA'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Episodes',
+  description: 'All episodes of Terms & Conditions: The Fine Print',
+}
+
+export default function EpisodesPage() {
+  return (
+    <>
+      {/* Header */}
+      <div className="pt-32 pb-16 bg-espresso">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px w-8 bg-copper/60" />
+            <span className="text-xs font-sans uppercase tracking-[0.2em] text-copper/80">All Episodes</span>
+          </div>
+          <h1 className="font-serif text-4xl lg:text-6xl font-bold text-cream mb-4">
+            Episodes
+          </h1>
+          <p className="text-beige/60 text-lg max-w-xl">
+            Conversations about the financial infrastructure, institutions, and policies
+            that shape economic life.
+          </p>
+        </div>
+      </div>
+
+      {/* Platform links */}
+      <div className="bg-espresso border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4 flex flex-wrap gap-4">
+          {[
+            { label: '▶ Spotify', href: 'https://open.spotify.com' },
+            { label: '🎙 Apple Podcasts', href: 'https://podcasts.apple.com' },
+            { label: '▶ YouTube', href: 'https://youtube.com' },
+            { label: 'RSS Feed', href: '/api/rss' },
+          ].map(p => (
+            <a
+              key={p.label}
+              href={p.href}
+              target={p.href.startsWith('http') ? '_blank' : undefined}
+              rel="noopener noreferrer"
+              className="text-xs font-medium text-copper/80 hover:text-copper border border-copper/20 px-3 py-1.5 rounded-full transition-colors"
+            >
+              {p.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* Episodes grid */}
+      <div className="py-16 lg:py-20 bg-cream">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          {/* Featured */}
+          <div className="mb-12">
+            <EpisodeCard episode={episodes[0]} featured />
+          </div>
+
+          {/* Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {episodes.slice(1).map(ep => (
+              <EpisodeCard key={ep.slug} episode={ep} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <NewsletterCTA />
+    </>
+  )
+}
