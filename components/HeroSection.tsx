@@ -10,7 +10,7 @@ export default function HeroSection() {
         className="absolute inset-0 bg-cover bg-center opacity-20"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1800&q=80')",
+            "url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1800&q=80')",
         }}
       />
       {/* Navy gradient overlay */}
