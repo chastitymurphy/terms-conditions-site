@@ -177,7 +177,7 @@ export function getGuest(slug: string): Guest | undefined {
   return guests.find(g => g.slug === slug)
 }
 
-export const SUBSTACK_URL = 'https://termsconditions.substack.com' // Update when live
+export const SUBSTACK_URL = 'https://substack.com/@chastitymurphy'
 export const PODCAST_TITLE = 'Terms & Conditions: The Fine Print'
 export const PODCAST_DESCRIPTION = 'A podcast and publication exploring the financial infrastructure, technologies, institutions, and policies that shape economic life.'
 export const HOST_NAME = 'Chastity Murphy'
