@@ -8,18 +8,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Primary palette
-        espresso:    '#14213D',   // Deep Navy — primary text
-        'warm-dark': '#0A1628',   // Very dark navy — hero backgrounds
-        terracotta:  '#C66A3D',   // Terracotta accent
-        'burnt-clay':'#A85530',   // Darker terracotta
-        cinnamon:    '#B06040',   // Mid terracotta
-        copper:      '#D4A44B',   // Muted Gold — secondary accent
-        // Backgrounds
-        beige:       '#E8DFD0',   // Warm off-white card bg
-        'beige-light':'#EDE8DF',  // Lighter card bg
-        cream:       '#F7F3EC',   // Warm Cream — main background
-        'cream-dark':'#F0EBE2',   // Slightly darker cream
+        // Dark backgrounds (hero, footer, newsletter)
+        espresso:    '#2B3A52',   // Deep slate blue — primary text
+        'warm-dark': '#1A2B42',   // Muted navy — hero / dark sections
+        // Accents
+        terracotta:  '#C4623A',   // Terracotta
+        'burnt-clay':'#A8522E',   // Darker terracotta (hover states)
+        cinnamon:    '#A05A3A',   // Mid terracotta
+        copper:      '#D4A84B',   // Warm gold
+        rose:        '#C4847A',   // Dusty rose
+        // Warm neutral backgrounds
+        beige:       '#E6D9C4',   // Light sand
+        'beige-light':'#EDE5D8',  // Between sand and oatmeal
+        cream:       '#FAF7F0',   // Soft cream — main background
+        'cream-dark':'#F2E8D6',   // Warm oatmeal — section backgrounds
         // Utility
         'warm-gray': '#6B7280',   // Supporting gray
       },
@@ -30,8 +32,8 @@ const config: Config = {
       typography: {
         DEFAULT: {
           css: {
-            color: '#14213D',
-            a: { color: '#C66A3D' },
+            color: '#2B3A52',
+            a: { color: '#C4623A' },
             'h1,h2,h3,h4': { fontFamily: 'var(--font-playfair)' },
           },
         },
