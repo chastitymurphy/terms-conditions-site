@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { SUBSTACK_URL } from '@/lib/data'
-import { SUBSTACK_URL } from '@/lib/data'
 
 export default function HeroSection() {
   return (
@@ -33,13 +32,7 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-28 pb-24">
         <div className="max-w-3xl">
           {/* Eyebrow */}
-          {/* Eyebrow */}
           <div className="flex items-center gap-3 mb-6">
-            <div className="h-px w-10 bg-copper/60" />
-            <span className="text-xs font-sans uppercase tracking-[0.25em] text-copper/80">
-              Presented by the University of Manchester
-            </span>
-          </div>
             <div className="h-px w-10 bg-copper/60" />
             <span className="text-xs font-sans uppercase tracking-[0.25em] text-copper/80">
               Presented by the University of Manchester
