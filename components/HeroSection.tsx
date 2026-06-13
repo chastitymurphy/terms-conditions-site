@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import Image from 'next/image'
+import { SUBSTACK_URL } from '@/lib/data'
 import { SUBSTACK_URL } from '@/lib/data'
 
 export default function HeroSection() {
@@ -31,7 +33,13 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-28 pb-24">
         <div className="max-w-3xl">
           {/* Eyebrow */}
-          <div className="flex items-center gap-3 mb-8">
+          {/* Eyebrow */}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-px w-10 bg-copper/60" />
+            <span className="text-xs font-sans uppercase tracking-[0.25em] text-copper/80">
+              Presented by the University of Manchester
+            </span>
+          </div>
             <div className="h-px w-10 bg-copper/60" />
             <span className="text-xs font-sans uppercase tracking-[0.25em] text-copper/80">
               Presented by the University of Manchester
@@ -82,6 +90,22 @@ export default function HeroSection() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
+          </div>
+
+          {/* Host byline */}
+          <div className="flex items-center gap-3 mt-10">
+            <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-copper/40 shrink-0">
+              <Image
+                src="/chastity-murphy.jpg"
+                alt="Chastity Murphy"
+                fill
+                className="object-cover object-top"
+              />
+            </div>
+            <div>
+              <p className="text-xs font-sans uppercase tracking-[0.2em] text-beige/50 mb-0.5">Hosted by</p>
+              <p className="text-sm font-medium text-beige/80">Chastity Murphy</p>
+            </div>
           </div>
         </div>
 
