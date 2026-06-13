@@ -8,17 +8,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        espresso:    '#6B3520',
-        'warm-dark': '#3D1C0A',
-        terracotta:  '#B84A2E',
-        'burnt-clay':'#9B4520',
-        cinnamon:    '#A05530',
-        copper:      '#B87B4F',
-        beige:       '#E8D5C0',
-        'beige-light':'#F0E5D8',
-        cream:       '#FAF7F2',
-        'cream-dark':'#F2EBE0',
-        'warm-gray': '#8A7B72',
+        // Primary palette
+        espresso:    '#14213D',   // Deep Navy — primary text
+        'warm-dark': '#0A1628',   // Very dark navy — hero backgrounds
+        terracotta:  '#C66A3D',   // Terracotta accent
+        'burnt-clay':'#A85530',   // Darker terracotta
+        cinnamon:    '#B06040',   // Mid terracotta
+        copper:      '#D4A44B',   // Muted Gold — secondary accent
+        // Backgrounds
+        beige:       '#E8DFD0',   // Warm off-white card bg
+        'beige-light':'#EDE8DF',  // Lighter card bg
+        cream:       '#F7F3EC',   // Warm Cream — main background
+        'cream-dark':'#F0EBE2',   // Slightly darker cream
+        // Utility
+        'warm-gray': '#6B7280',   // Supporting gray
       },
       fontFamily: {
         serif: ['var(--font-playfair)', 'Georgia', 'serif'],
@@ -27,8 +30,8 @@ const config: Config = {
       typography: {
         DEFAULT: {
           css: {
-            color: '#2C1810',
-            a: { color: '#B84A2E' },
+            color: '#14213D',
+            a: { color: '#C66A3D' },
             'h1,h2,h3,h4': { fontFamily: 'var(--font-playfair)' },
           },
         },
