@@ -78,7 +78,7 @@ export default function AboutPage() {
                 <ul className="space-y-3 text-sm text-warm-gray">
                   <li className="flex gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-terracotta mt-1.5 shrink-0" />
-                    <span>University of Manchester — [Role to be added]</span>
+                    <span>University of Manchester</span>
                   </li>
                 </ul>
                 <p className="text-xs text-warm-gray/60 mt-4 italic">
