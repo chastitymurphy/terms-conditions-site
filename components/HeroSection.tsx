@@ -61,7 +61,7 @@ export default function HeroSection() {
           <p className="font-serif text-xl lg:text-2xl italic text-cream/90 leading-relaxed mb-4 max-w-lg">
             Why does it feel like the economy runs on rules nobody explained to us?
           </p>
-          <p className="font-sans text-lg text-cream/62 leading-relaxed mb-10 max-w-lg">
+          <p className="font-sans text-lg text-cream leading-relaxed mb-10 max-w-lg">
             Terms &amp; Conditions explores the hidden systems behind money, technology,
             wealth, opportunity, and public life — and the people working to build
             something better.
