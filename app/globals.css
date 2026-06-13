@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --espresso:    #2C1810;
+  --warm-dark:   #1A0F08;
+  --terracotta:  #B84A2E;
+  --burnt-clay:  #9B4520;
+  --cinnamon:    #A05530;
+  --copper:      #B87B4F;
+  --beige:       #E8D5C0;
+  --beige-light: #F0E5D8;
+  --cream:       #FAF7F2;
+  --cream-dark:  #F2EBE0;
+  --warm-gray:   #8A7B72;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-espresso font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+
+  ::selection {
+    @apply bg-terracotta/20 text-espresso;
+  }
+}
+
+@layer components {
+  /* Grain texture overlay */
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Editorial divider */
+  .divider-warm {
+    @apply border-t border-copper/20;
+  }
+
+  /* Topic pill */
+  .topic-pill {
+    @apply inline-block text-xs font-sans font-medium uppercase tracking-widest px-3 py-1 rounded-full;
+    @apply bg-beige text-cinnamon border border-copper/30;
+  }
+
+  /* Play button */
+  .play-btn {
+    @apply flex items-center gap-2 text-sm font-medium text-espresso;
+    @apply border border-espresso/30 px-4 py-2 rounded-full;
+    @apply hover:bg-espresso hover:text-cream transition-colors duration-200;
+  }
+
+  /* Primary CTA */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full;
+    @apply bg-terracotta text-cream font-medium text-sm;
+    @apply hover:bg-burnt-clay transition-colors duration-200;
+  }
+
+  /* Ghost button */
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full;
+    @apply border border-current text-espresso font-medium text-sm;
+    @apply hover:bg-espresso hover:text-cream transition-colors duration-200;
+  }
+
+  /* Card hover */
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  }
+}
+
+/* Playfair Drop Caps */
+.drop-cap::first-letter {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 4.5rem;
+  line-height: 0.85;
+  float: left;
+  margin-right: 0.08em;
+  margin-top: 0.05em;
+  color: var(--terracotta);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream-dark); }
+::-webkit-scrollbar-thumb { background: var(--copper); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--terracotta); }
