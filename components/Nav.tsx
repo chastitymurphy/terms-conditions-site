@@ -31,10 +31,10 @@ export default function Nav() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-20">
         {/* Logo */}
         <Link href="/" className="group flex flex-col leading-none">
-          <span className="font-serif text-base lg:text-lg font-bold text-espresso tracking-tight">
+          <span className={`font-serif text-base lg:text-lg font-bold tracking-tight transition-colors duration-300 ${scrolled ? 'text-espresso' : 'text-cream'}`}>
             Terms &amp; Conditions
           </span>
-          <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-warm-gray group-hover:text-terracotta transition-colors">
+          <span className={`font-sans text-[10px] uppercase tracking-[0.2em] transition-colors duration-300 group-hover:text-terracotta ${scrolled ? 'text-warm-gray' : 'text-beige/60'}`}>
             The Fine Print
           </span>
         </Link>
@@ -45,7 +45,7 @@ export default function Nav() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-espresso/70 hover:text-espresso transition-colors tracking-wide"
+              className={`text-sm font-medium transition-colors tracking-wide hover:text-terracotta ${scrolled ? 'text-espresso/70' : 'text-beige/80'}`}
             >
               {link.label}
             </Link>
@@ -66,7 +66,7 @@ export default function Nav() {
 
         {/* Mobile hamburger */}
         <button
-          className="lg:hidden p-2 text-espresso"
+          className={`lg:hidden p-2 transition-colors ${scrolled ? 'text-espresso' : 'text-cream'}`}
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
