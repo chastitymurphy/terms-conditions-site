@@ -1,5 +1,6 @@
 import NewsletterCTA from '@/components/NewsletterCTA'
 import { Metadata } from 'next'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -61,6 +62,18 @@ export default function AboutPage() {
 
           {/* About the Host */}
           <div>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-espresso mb-6">
+              About the Host
+            </h2>
+            {/* Host photo */}
+            <div className="relative w-40 h-40 rounded-2xl overflow-hidden mb-6 border border-beige">
+              <Image
+                src="/chastity-murphy.jpg"
+                alt="Chastity Murphy"
+                fill
+                className="object-cover object-top"
+              />
+            </div>
             <h2 className="font-serif text-3xl lg:text-4xl font-bold text-espresso mb-6">
               About the Host
             </h2>
