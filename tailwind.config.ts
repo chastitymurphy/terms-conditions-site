@@ -8,8 +8,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        espresso:    '#2C1810',
-        'warm-dark': '#1A0F08',
+        espresso:    '#6B3520',
+        'warm-dark': '#3D1C0A',
         terracotta:  '#B84A2E',
         'burnt-clay':'#9B4520',
         cinnamon:    '#A05530',
