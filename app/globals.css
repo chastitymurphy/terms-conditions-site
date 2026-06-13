@@ -3,16 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --espresso:    #14213D;
-  --warm-dark:   #0A1628;
-  --terracotta:  #C66A3D;
-  --burnt-clay:  #A85530;
-  --cinnamon:    #B06040;
-  --copper:      #D4A44B;
-  --beige:       #E8DFD0;
-  --beige-light: #EDE8DF;
-  --cream:       #F7F3EC;
-  --cream-dark:  #F0EBE2;
+  --espresso:    #2B3A52;
+  --warm-dark:   #1A2B42;
+  --terracotta:  #C4623A;
+  --burnt-clay:  #A8522E;
+  --cinnamon:    #A05A3A;
+  --copper:      #D4A84B;
+  --rose:        #C4847A;
+  --beige:       #E6D9C4;
+  --beige-light: #EDE5D8;
+  --cream:       #FAF7F0;
+  --cream-dark:  #F2E8D6;
   --warm-gray:   #6B7280;
 }
 
@@ -33,16 +34,6 @@
 }
 
 @layer components {
-  /* Grain texture overlay */
-  .grain::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1;
-  }
-
   .divider-warm { @apply border-t border-copper/20; }
 
   .topic-pill {
