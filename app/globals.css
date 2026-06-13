@@ -3,23 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --espresso:    #6B3520;
-  --warm-dark:   #3D1C0A;
-  --terracotta:  #B84A2E;
-  --burnt-clay:  #9B4520;
-  --cinnamon:    #A05530;
-  --copper:      #B87B4F;
-  --beige:       #E8D5C0;
-  --beige-light: #F0E5D8;
-  --cream:       #FAF7F2;
-  --cream-dark:  #F2EBE0;
-  --warm-gray:   #8A7B72;
+  --espresso:    #14213D;
+  --warm-dark:   #0A1628;
+  --terracotta:  #C66A3D;
+  --burnt-clay:  #A85530;
+  --cinnamon:    #B06040;
+  --copper:      #D4A44B;
+  --beige:       #E8DFD0;
+  --beige-light: #EDE8DF;
+  --cream:       #F7F3EC;
+  --cream-dark:  #F0EBE2;
+  --warm-gray:   #6B7280;
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
     @apply bg-cream text-espresso font-sans antialiased;
@@ -36,9 +34,6 @@
 
 @layer components {
   /* Grain texture overlay */
-  .grain {
-    position: relative;
-  }
   .grain::after {
     content: '';
     position: absolute;
@@ -48,45 +43,37 @@
     z-index: 1;
   }
 
-  /* Editorial divider */
-  .divider-warm {
-    @apply border-t border-copper/20;
-  }
+  .divider-warm { @apply border-t border-copper/20; }
 
-  /* Topic pill */
   .topic-pill {
     @apply inline-block text-xs font-sans font-medium uppercase tracking-widest px-3 py-1 rounded-full;
     @apply bg-beige text-cinnamon border border-copper/30;
   }
 
-  /* Play button */
   .play-btn {
     @apply flex items-center gap-2 text-sm font-medium text-espresso;
     @apply border border-espresso/30 px-4 py-2 rounded-full;
     @apply hover:bg-espresso hover:text-cream transition-colors duration-200;
   }
 
-  /* Primary CTA */
   .btn-primary {
     @apply inline-flex items-center gap-2 px-6 py-3 rounded-full;
     @apply bg-terracotta text-cream font-medium text-sm;
     @apply hover:bg-burnt-clay transition-colors duration-200;
   }
 
-  /* Ghost button */
   .btn-ghost {
     @apply inline-flex items-center gap-2 px-6 py-3 rounded-full;
-    @apply border border-current text-espresso font-medium text-sm;
+    @apply border border-current font-medium text-sm;
     @apply hover:bg-espresso hover:text-cream transition-colors duration-200;
   }
 
-  /* Card hover */
   .card-hover {
     @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
   }
 }
 
-/* Playfair Drop Caps */
+/* Drop caps */
 .drop-cap::first-letter {
   font-family: var(--font-playfair), Georgia, serif;
   font-size: 4.5rem;
