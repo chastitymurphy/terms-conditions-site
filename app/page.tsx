@@ -17,6 +17,29 @@ export default async function HomePage() {
     <>
       <HeroSection />
 
+      {/* Streaming platforms — right below hero */}
+      <section className="py-5 bg-warm-dark border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="flex flex-wrap items-center justify-center gap-3 lg:gap-6">
+            <span className="text-xs font-sans uppercase tracking-[0.2em] text-cream/40">Listen on</span>
+            {[
+              { label: 'Spotify', href: 'https://open.spotify.com' },
+              { label: 'Apple Podcasts', href: 'https://podcasts.apple.com' },
+              { label: 'YouTube', href: 'https://youtube.com' },
+              { label: 'RSS Feed', href: '/api/rss' },
+            ].map(p => (
+              <a key={p.label} href={p.href} target={p.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer"
+                className="text-xs font-medium text-cream/60 hover:text-copper transition-colors border border-white/15 px-4 py-2 rounded-full hover:border-copper/40">
+                {p.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter CTA — second thing after hero */}
+      <NewsletterCTA />
+
       {/* Featured Episode */}
       {latestEpisode && (
         <section className="py-20 lg:py-28 bg-cream">
@@ -101,26 +124,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <NewsletterCTA />
-
-      <section className="py-10 bg-cream-dark">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-10">
-            <span className="text-xs font-sans uppercase tracking-[0.2em] text-warm-gray">Available on</span>
-            {[
-              { label: 'Spotify', href: 'https://open.spotify.com' },
-              { label: 'Apple Podcasts', href: 'https://podcasts.apple.com' },
-              { label: 'YouTube', href: 'https://youtube.com' },
-              { label: 'RSS Feed', href: '/api/rss' },
-            ].map(p => (
-              <a key={p.label} href={p.href} target={p.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer"
-                className="text-sm font-medium text-espresso/60 hover:text-terracotta transition-colors border border-beige/60 px-4 py-2 rounded-full hover:border-terracotta/40">
-                {p.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
     </>
   )
 }
