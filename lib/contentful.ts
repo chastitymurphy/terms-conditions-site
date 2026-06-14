@@ -129,3 +129,74 @@ export async function getGuests(): Promise<Guest[]> {
     } satisfies Guest
   })
 }
+
+
+// ─── Site Settings ───────────────────────────────────────────────────────────
+
+export interface SiteSettings {
+  siteTitle: string
+  siteTagline: string
+  heroQuestion: string
+  heroDescription: string
+  heroImageUrl: string
+  aboutPodcast: string
+  aboutHost: string
+  hostName: string
+  hostTitle: string
+  hostAffiliation: string
+  substackUrl: string
+  spotifyUrl: string
+  applePodcastsUrl: string
+  youtubeUrl: string
+}
+
+export async function getSiteSettings(): Promise<SiteSettings> {
+  const res = await fetch(
+    `${BASE}/entries/siteSettings`,
+    {
+      headers: { Authorization: `Bearer ${TOKEN}` },
+      next: { revalidate: 60 },
+    }
+  )
+
+  // Fallback defaults if Contentful is unavailable
+  const defaults: SiteSettings = {
+    siteTitle:       'Terms & Conditions: The Fine Print',
+    siteTagline:     'The Hidden Rules of Economic Life',
+    heroQuestion:    'Why does it feel like the economy runs on rules nobody explained to us?',
+    heroDescription: 'Terms & Conditions explores the hidden systems behind money, technology, wealth, opportunity, and public life \u2014 and the people working to build something better.',
+    heroImageUrl:    'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1800&q=80',
+    aboutPodcast:    'Terms & Conditions explores the hidden rules of economic life.',
+    aboutHost:       'Chastity Murphy is a policy strategist, researcher, and former U.S. Treasury advisor.',
+    hostName:        'Chastity Murphy',
+    hostTitle:       'Policy Strategist & Former U.S. Treasury Advisor',
+    hostAffiliation: 'University of Manchester',
+    substackUrl:     'https://substack.com/@chastitymurphy',
+    spotifyUrl:      'https://open.spotify.com',
+    applePodcastsUrl:'https://podcasts.apple.com',
+    youtubeUrl:      'https://youtube.com',
+  }
+
+  if (!res.ok) return defaults
+
+  const item = await res.json()
+  const fields = item.fields ?? {}
+  const loc = (key: string) => fields[key]?.['en-US'] ?? (defaults as any)[key]
+
+  return {
+    siteTitle:       loc('siteTitle'),
+    siteTagline:     loc('siteTagline'),
+    heroQuestion:    loc('heroQuestion'),
+    heroDescription: loc('heroDescription'),
+    heroImageUrl:    loc('heroImageUrl'),
+    aboutPodcast:    loc('aboutPodcast'),
+    aboutHost:       loc('aboutHost'),
+    hostName:        loc('hostName'),
+    hostTitle:       loc('hostTitle'),
+    hostAffiliation: loc('hostAffiliation'),
+    substackUrl:     loc('substackUrl'),
+    spotifyUrl:      loc('spotifyUrl'),
+    applePodcastsUrl:loc('applePodcastsUrl'),
+    youtubeUrl:      loc('youtubeUrl'),
+  }
+}
