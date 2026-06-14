@@ -1,16 +1,11 @@
 import { getEpisodes, getReflections } from '@/lib/contentful'
+import { getEpisodes, getReflections } from '@/lib/contentful'
 import HeroSection from '@/components/HeroSection'
 import EpisodeCard from '@/components/EpisodeCard'
 import ReflectionCard from '@/components/ReflectionCard'
 import TopicsGrid from '@/components/TopicsGrid'
 import NewsletterCTA from '@/components/NewsletterCTA'
 import StreamingLinks from '@/components/StreamingLinks'
-import Link from 'next/link'
-import HeroSection from '@/components/HeroSection'
-import EpisodeCard from '@/components/EpisodeCard'
-import ReflectionCard from '@/components/ReflectionCard'
-import TopicsGrid from '@/components/TopicsGrid'
-import NewsletterCTA from '@/components/NewsletterCTA'
 import Link from 'next/link'
 
 export default async function HomePage() {
