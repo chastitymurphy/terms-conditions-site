@@ -1,5 +1,4 @@
 import { getEpisodes } from '@/lib/contentful'
-import { getEpisodes } from '@/lib/contentful'
 import EpisodeCard from '@/components/EpisodeCard'
 import NewsletterCTA from '@/components/NewsletterCTA'
 import StreamingLinks from '@/components/StreamingLinks'
