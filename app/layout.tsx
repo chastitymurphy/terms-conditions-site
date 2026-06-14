@@ -1,5 +1,5 @@
-import type { Metadata } from 'next'
 import React from 'react'
+import type { Metadata } from 'next'
 import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/Nav'
@@ -34,9 +34,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const s = await getSiteSettings()
 
-  // CSS custom properties from Contentful — change in Contentful → Site Settings → Publish
-  // Changes go live within ~60 seconds, no redeployment needed
-  /* eslint-disable @typescript-eslint/no-explicit-any */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const tokens: any = {
     '--cream':      s.colorBackground,
     '--cream-dark': s.colorSand,
