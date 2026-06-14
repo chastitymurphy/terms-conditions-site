@@ -1,6 +1,7 @@
 import { getEpisodes } from '@/lib/contentful'
 import EpisodeCard from '@/components/EpisodeCard'
 import NewsletterCTA from '@/components/NewsletterCTA'
+import StreamingLinks from '@/components/StreamingLinks'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Episodes', description: 'All episodes of Terms & Conditions: The Fine Print' }
@@ -17,10 +18,8 @@ export default async function EpisodesPage() {
         </div>
       </div>
       <div className="bg-espresso border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4 flex flex-wrap gap-4">
-          {[{ label: '▶ Spotify', href: 'https://open.spotify.com' }, { label: '🎙 Apple Podcasts', href: 'https://podcasts.apple.com' }, { label: '▶ YouTube', href: 'https://youtube.com' }, { label: 'RSS Feed', href: '/api/rss' }].map(p => (
-            <a key={p.label} href={p.href} target={p.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" className="text-xs font-medium text-copper/80 hover:text-copper border border-copper/20 px-3 py-1.5 rounded-full transition-colors">{p.label}</a>
-          ))}
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-5">
+          <StreamingLinks dark />
         </div>
       </div>
       <div className="py-16 lg:py-20 bg-cream">
