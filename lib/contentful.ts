@@ -148,6 +148,21 @@ export interface SiteSettings {
   spotifyUrl: string
   applePodcastsUrl: string
   youtubeUrl: string
+  // Colors
+  colorBackground: string
+  colorSand: string
+  colorText: string
+  colorAccent: string
+  colorGold: string
+  colorHeroBg: string
+  // Typography
+  fontSizeHero: string
+  fontSizeBody: string
+  fontSizeSection: string
+}
+  spotifyUrl: string
+  applePodcastsUrl: string
+  youtubeUrl: string
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -175,6 +190,15 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     spotifyUrl:      'https://open.spotify.com',
     applePodcastsUrl:'https://podcasts.apple.com',
     youtubeUrl:      'https://youtube.com',
+    colorBackground: '#FAF7F0',
+    colorSand:       '#F2E8D6',
+    colorText:       '#2B3A52',
+    colorAccent:     '#C4623A',
+    colorGold:       '#D4A84B',
+    colorHeroBg:     '#1A2B42',
+    fontSizeHero:    'clamp(48px, 7vw, 72px)',
+    fontSizeBody:    '18px',
+    fontSizeSection: '32px',
   }
 
   if (!res.ok) return defaults
@@ -198,5 +222,14 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     spotifyUrl:      loc('spotifyUrl'),
     applePodcastsUrl:loc('applePodcastsUrl'),
     youtubeUrl:      loc('youtubeUrl'),
+    colorBackground: loc('colorBackground'),
+    colorSand:       loc('colorSand'),
+    colorText:       loc('colorText'),
+    colorAccent:     loc('colorAccent'),
+    colorGold:       loc('colorGold'),
+    colorHeroBg:     loc('colorHeroBg'),
+    fontSizeHero:    loc('fontSizeHero'),
+    fontSizeBody:    loc('fontSizeBody'),
+    fontSizeSection: loc('fontSizeSection'),
   }
 }
