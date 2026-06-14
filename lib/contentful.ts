@@ -160,10 +160,6 @@ export interface SiteSettings {
   fontSizeBody: string
   fontSizeSection: string
 }
-  spotifyUrl: string
-  applePodcastsUrl: string
-  youtubeUrl: string
-}
 
 export async function getSiteSettings(): Promise<SiteSettings> {
   const res = await fetch(
