@@ -33,23 +33,20 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const s = await getSiteSettings()
 
-  // Inject Contentful color + font tokens as CSS custom properties on <html>
-  // Change any of these in Contentful → Site Settings → Publish → live in ~60s
-  const designTokens = {
-    '--cream':        s.colorBackground,
-    '--cream-dark':   s.colorSand,
-    '--espresso':     s.colorText,
-    '--warm-dark':    s.colorHeroBg,
-    '--terracotta':   s.colorAccent,
-    '--copper':       s.colorGold,
-  } as React.CSSProperties
+  // CSS custom properties from Contentful — change in Contentful → Site Settings → Publish
+  // Changes go live within ~60 seconds, no redeployment needed
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const tokens: any = {
+    '--cream':      s.colorBackground,
+    '--cream-dark': s.colorSand,
+    '--espresso':   s.colorText,
+    '--warm-dark':  s.colorHeroBg,
+    '--terracotta': s.colorAccent,
+    '--copper':     s.colorGold,
+  }
 
   return (
-    <html
-      lang="en"
-      className={`${playfair.variable} ${inter.variable}`}
-      style={designTokens}
-    >
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`} style={tokens}>
       <body>
         <Nav />
         <main>{children}</main>
