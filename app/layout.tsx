@@ -33,27 +33,24 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const s = await getSiteSettings()
 
-  // CSS variable overrides from Contentful — change in Contentful, live in ~60s
-  const cssVars = [
-    `:root {`,
-    `  --cream:       ${s.colorBackground};`,
-    `  --cream-dark:  ${s.colorSand};`,
-    `  --espresso:    ${s.colorText};`,
-    `  --warm-dark:   ${s.colorHeroBg};`,
-    `  --terracotta:  ${s.colorAccent};`,
-    `  --copper:      ${s.colorGold};`,
-    `  --font-size-hero:    ${s.fontSizeHero};`,
-    `  --font-size-body:    ${s.fontSizeBody};`,
-    `  --font-size-section: ${s.fontSizeSection};`,
-    `}`,
-    `body { font-size: ${s.fontSizeBody}; }`,
-  ].join('\n')
+  // Inject Contentful color + font tokens as CSS custom properties on <html>
+  // Change any of these in Contentful → Site Settings → Publish → live in ~60s
+  const designTokens = {
+    '--cream':        s.colorBackground,
+    '--cream-dark':   s.colorSand,
+    '--espresso':     s.colorText,
+    '--warm-dark':    s.colorHeroBg,
+    '--terracotta':   s.colorAccent,
+    '--copper':       s.colorGold,
+  } as React.CSSProperties
 
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html
+      lang="en"
+      className={`${playfair.variable} ${inter.variable}`}
+      style={designTokens}
+    >
       <body>
-        {/* Contentful-managed design tokens injected here */}
-        <style dangerouslySetInnerHTML={{ __html: cssVars }} />
         <Nav />
         <main>{children}</main>
         <Footer />
