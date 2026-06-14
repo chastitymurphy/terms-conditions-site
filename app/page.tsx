@@ -4,6 +4,13 @@ import EpisodeCard from '@/components/EpisodeCard'
 import ReflectionCard from '@/components/ReflectionCard'
 import TopicsGrid from '@/components/TopicsGrid'
 import NewsletterCTA from '@/components/NewsletterCTA'
+import StreamingLinks from '@/components/StreamingLinks'
+import Link from 'next/link'
+import HeroSection from '@/components/HeroSection'
+import EpisodeCard from '@/components/EpisodeCard'
+import ReflectionCard from '@/components/ReflectionCard'
+import TopicsGrid from '@/components/TopicsGrid'
+import NewsletterCTA from '@/components/NewsletterCTA'
 import Link from 'next/link'
 
 export default async function HomePage() {
@@ -105,6 +112,10 @@ export default async function HomePage() {
       <NewsletterCTA />
 
       <section className="py-10 bg-cream-dark">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <StreamingLinks />
+        </div>
+      </section>
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-10">
             <span className="text-xs font-sans uppercase tracking-[0.2em] text-warm-gray">Available on</span>
