@@ -15,6 +15,7 @@ export interface Episode {
   takeaways: string[]
   resources: Resource[]
   transcript?: string
+  status?: 'recorded' | 'in_production' | 'scheduled' | 'published'
 }
 
 export interface Reflection {
@@ -27,6 +28,7 @@ export interface Reflection {
   topic: string
   image?: string
   readingTime: string
+  status?: 'draft' | 'scheduled' | 'published'
 }
 
 export interface Guest {
@@ -39,6 +41,8 @@ export interface Guest {
   episodes: string[]
   website?: string
   twitter?: string
+  status?: 'recorded' | 'announced' | 'published'
+  discussionTheme?: string
 }
 
 export interface Resource {
