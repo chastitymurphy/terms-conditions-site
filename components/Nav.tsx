@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { SUBSTACK_URL } from '@/lib/data'
 
+// Pre-launch nav: Resources hidden. Reflections kept for now (will appear when content exists).
 const navLinks = [
   { href: '/episodes',    label: 'Episodes' },
   { href: '/reflections', label: 'Reflections' },
   { href: '/guests',      label: 'Guests' },
-  { href: '/resources',   label: 'Resources' },
   { href: '/about',       label: 'About' },
 ]
 
