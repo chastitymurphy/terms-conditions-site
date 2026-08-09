@@ -5,7 +5,7 @@ import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import { getSiteSettings } from '@/lib/contentful'
-import { PODCAST_TITLE, PODCAST_DESCRIPTION, SITE_URL } from '@/lib/data'
+import { PODCAST_TITLE, PODCAST_DESCRIPTION, SITE_URL, HOST_NAME } from '@/lib/data'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -21,19 +21,50 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: PODCAST_TITLE,
+    default: `${PODCAST_TITLE} | Podcast`,
     template: `%s | ${PODCAST_TITLE}`,
   },
   description: PODCAST_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
-  openGraph: { siteName: PODCAST_TITLE, type: 'website', locale: 'en_US' },
-  twitter: { card: 'summary_large_image' },
+  applicationName: PODCAST_TITLE,
+  keywords: [
+    'podcast',
+    'financial infrastructure',
+    'public banking',
+    'fintech policy',
+    'payments',
+    'wealth inequality',
+    'economic democracy',
+    'Chastity Murphy',
+    'University of Manchester',
+  ],
+  authors: [{ name: HOST_NAME }],
+  creator: HOST_NAME,
+  publisher: PODCAST_TITLE,
   alternates: { types: { 'application/rss+xml': '/api/rss' } },
+  openGraph: {
+    siteName: PODCAST_TITLE,
+    title: `${PODCAST_TITLE} | Podcast`,
+    description: PODCAST_DESCRIPTION,
+    type: 'website',
+    locale: 'en_US',
+    url: SITE_URL,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${PODCAST_TITLE} | Podcast`,
+    description: PODCAST_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const s = await getSiteSettings()
 
+  // CSS custom properties from Contentful — change in Contentful → Site Settings → Publish
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const tokens: any = {
     '--cream':      s.colorBackground,
@@ -44,9 +75,51 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     '--copper':     s.colorGold,
   }
 
+  // PodcastSeries JSON-LD structured data — using ONLY verified facts.
+  // No fake episodes, no fake dates, no fake guests.
+  const podcastJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'PodcastSeries',
+    name: PODCAST_TITLE,
+    description: PODCAST_DESCRIPTION,
+    url: SITE_URL,
+    inLanguage: 'en-US',
+    author: {
+      '@type': 'Person',
+      name: s.hostName,
+      jobTitle: s.hostTitle,
+      affiliation: s.hostAffiliation ? {
+        '@type': 'Organization',
+        name: s.hostAffiliation,
+      } : undefined,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Terms & Conditions: The Fine Print',
+    },
+    // No episodes array yet — pre-launch.
+  }
+
+  // Organization JSON-LD
+  const orgJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: PODCAST_TITLE,
+    url: SITE_URL,
+    description: PODCAST_DESCRIPTION,
+  }
+
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`} style={tokens}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(podcastJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
         <Nav />
         <main>{children}</main>
         <Footer />
