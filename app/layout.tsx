@@ -120,7 +120,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
-        <Nav />
+        <Nav showResources={s.showResources} />
         <main>{children}</main>
         <Footer />
       </body>
