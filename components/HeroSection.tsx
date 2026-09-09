@@ -17,11 +17,71 @@ export default async function HeroSection() {
       {/* Ambient background — editable in Contentful → Site Settings → Hero Background Image URL */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-20"
-        style={{ backgroundImage: `url('${s.heroImageUrl}')` }}
+        style={{
+          backgroundImage: `url('${s.heroImageUrl}')`,
+          animation: 'kenburns 45s ease-in-out infinite',
+          willChange: 'transform',
+        }}
       />
       <div className="absolute inset-0 bg-gradient-to-r from-warm-dark/98 via-warm-dark/88 to-warm-dark/60" />
 
       {/* Faint blueprint grid for depth */}
+
+      {/* ── Hidden infrastructure — data pulses riding the rails ──
+          Payment flows moving through the invisible systems beneath economic life. */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        viewBox="0 0 1200 800"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+      >
+        <defs>
+          <filter id="pulseGlow" x="-300%" y="-300%" width="700%" height="700%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        {/* The rails — faint infrastructure lines */}
+        <g stroke="rgba(212,168,75,0.09)" strokeWidth="1.5" fill="none">
+          <path d="M -50 170 C 250 130, 520 260, 1250 190" />
+          <path d="M -50 430 C 300 390, 620 510, 1250 440" />
+          <path d="M -50 670 C 350 630, 700 740, 1250 680" />
+          <path d="M 180 -50 C 220 260, 140 560, 260 850" />
+          <path d="M 920 -50 C 880 260, 960 560, 840 850" />
+        </g>
+
+        {/* Junction nodes */}
+        <g fill="rgba(212,168,75,0.22)">
+          <circle cx="310" cy="196" r="3" />
+          <circle cx="620" cy="452" r="3" />
+          <circle cx="905" cy="305" r="3" />
+          <circle cx="208" cy="415" r="3" />
+          <circle cx="905" cy="620" r="3" />
+        </g>
+
+        {/* Traveling pulses — gold (payments), terracotta (data), cream (signal) */}
+        <g filter="url(#pulseGlow)">
+          <circle r="4.5" fill="#D4A84B" opacity="0.9">
+            <animateMotion dur="11s" repeatCount="indefinite" path="M -50 170 C 250 130, 520 260, 1250 190" />
+          </circle>
+          <circle r="3.5" fill="#C4623A" opacity="0.85">
+            <animateMotion dur="14s" begin="-4s" repeatCount="indefinite" path="M -50 430 C 300 390, 620 510, 1250 440" />
+          </circle>
+          <circle r="4" fill="#D4A84B" opacity="0.7">
+            <animateMotion dur="17s" begin="-9s" repeatCount="indefinite" path="M -50 670 C 350 630, 700 740, 1250 680" />
+          </circle>
+          <circle r="3" fill="#FAF7F0" opacity="0.55">
+            <animateMotion dur="13s" begin="-6s" repeatCount="indefinite" path="M 180 -50 C 220 260, 140 560, 260 850" />
+          </circle>
+          <circle r="4.5" fill="#D4A84B" opacity="0.8">
+            <animateMotion dur="15s" begin="-2s" repeatCount="indefinite" path="M 920 -50 C 880 260, 960 560, 840 850" />
+          </circle>
+        </g>
+      </svg>
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
