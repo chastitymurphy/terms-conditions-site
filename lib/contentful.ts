@@ -190,6 +190,7 @@ export interface SiteSettings {
   spotifyUrl: string
   applePodcastsUrl: string
   youtubeUrl: string
+  showResources: boolean
   // Colors
   colorBackground: string
   colorSand: string
@@ -230,6 +231,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     spotifyUrl:      '',
     applePodcastsUrl:'',
     youtubeUrl:      '',
+    showResources:   false,
     colorBackground: '#FAF7F0',
     colorSand:       '#F2E8D6',
     colorText:       '#2B3A52',
@@ -265,6 +267,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     spotifyUrl:      loc('spotifyUrl'),
     applePodcastsUrl:loc('applePodcastsUrl'),
     youtubeUrl:      loc('youtubeUrl'),
+    showResources:   fields['showResources']?.['en-US'] ?? false,
     colorBackground: loc('colorBackground'),
     colorSand:       loc('colorSand'),
     colorText:       loc('colorText'),
