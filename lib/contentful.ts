@@ -218,7 +218,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     siteTagline:     'The Hidden Rules of Economic Life',
     heroQuestion:    'Why does it feel like the economy runs on rules nobody explained to us?',
     heroDescription: 'Terms & Conditions explores the hidden systems behind money, technology, wealth, opportunity, and public life \u2014 and the people working to build something better.',
-    heroImageUrl:    'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1800&q=80',
+    heroImageUrl:    'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1800&q=80',
     aboutPodcast:    'Terms & Conditions explores the hidden rules of economic life.',
     aboutHost:       'Chastity Murphy is a policy strategist, researcher, and former U.S. Treasury advisor.',
     hostName:        'Chastity Murphy',
