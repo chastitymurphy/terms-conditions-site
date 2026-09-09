@@ -114,6 +114,13 @@
   50%      { opacity: 0.65; }
 }
 
+/* Slow cinematic drift — hero background never sits still */
+@keyframes kenburns {
+  0%   { transform: scale(1.08) translate(0, 0); }
+  50%  { transform: scale(1.18) translate(-1.6%, -1.2%); }
+  100% { transform: scale(1.08) translate(0, 0); }
+}
+
 /* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
