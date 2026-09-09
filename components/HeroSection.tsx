@@ -3,9 +3,9 @@ import Image from 'next/image'
 import { getSiteSettings } from '@/lib/contentful'
 
 // Immersive animated hero — "fine print coming into focus"
+// Background: cinematic video (Capitol at dusk, contracts drifting, data lines) — autoplay/muted/loop.
 // Sequence: MLTI/UoM header → title pops in → "The Fine Print" → rule draws →
-// tagline reveals word-by-word from blur (hidden rules becoming legible) → CTAs.
-// The podcast cover art is the visual centerpiece (floating). Host photo lives in the Host section.
+// tagline reveals word-by-word from blur → CTAs. Podcast cover art floats as the centerpiece.
 
 export default async function HeroSection() {
   const s = await getSiteSettings()
@@ -14,91 +14,24 @@ export default async function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-warm-dark">
-      {/* Ambient background — editable in Contentful → Site Settings → Hero Background Image URL */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-20"
-        style={{
-          backgroundImage: `url('${s.heroImageUrl}')`,
-          animation: 'kenburns 45s ease-in-out infinite',
-          willChange: 'transform',
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-warm-dark/98 via-warm-dark/88 to-warm-dark/60" />
-
-      {/* Faint blueprint grid for depth */}
-
-      {/* ── Hidden infrastructure — data pulses riding the rails ──
-          Payment flows moving through the invisible systems beneath economic life. */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox="0 0 1200 800"
-        preserveAspectRatio="xMidYMid slice"
+      {/* Cinematic video background — contracts drifting through economic life.
+          Swap in Contentful later via Site Settings if wanted. */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        src="/hero-bg.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
         aria-hidden="true"
-      >
-        <defs>
-          <filter id="pulseGlow" x="-300%" y="-300%" width="700%" height="700%">
-            <feGaussianBlur stdDeviation="5" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
-        {/* The rails — faint infrastructure lines */}
-        <g stroke="rgba(212,168,75,0.09)" strokeWidth="1.5" fill="none">
-          <path d="M -50 170 C 250 130, 520 260, 1250 190" />
-          <path d="M -50 430 C 300 390, 620 510, 1250 440" />
-          <path d="M -50 670 C 350 630, 700 740, 1250 680" />
-          <path d="M 180 -50 C 220 260, 140 560, 260 850" />
-          <path d="M 920 -50 C 880 260, 960 560, 840 850" />
-        </g>
-
-        {/* Junction nodes */}
-        <g fill="rgba(212,168,75,0.22)">
-          <circle cx="310" cy="196" r="3" />
-          <circle cx="620" cy="452" r="3" />
-          <circle cx="905" cy="305" r="3" />
-          <circle cx="208" cy="415" r="3" />
-          <circle cx="905" cy="620" r="3" />
-        </g>
-
-        {/* Traveling pulses — gold (payments), terracotta (data), cream (signal) */}
-        <g filter="url(#pulseGlow)">
-          <circle r="4.5" fill="#D4A84B" opacity="0.9">
-            <animateMotion dur="11s" repeatCount="indefinite" path="M -50 170 C 250 130, 520 260, 1250 190" />
-          </circle>
-          <circle r="3.5" fill="#C4623A" opacity="0.85">
-            <animateMotion dur="14s" begin="-4s" repeatCount="indefinite" path="M -50 430 C 300 390, 620 510, 1250 440" />
-          </circle>
-          <circle r="4" fill="#D4A84B" opacity="0.7">
-            <animateMotion dur="17s" begin="-9s" repeatCount="indefinite" path="M -50 670 C 350 630, 700 740, 1250 680" />
-          </circle>
-          <circle r="3" fill="#FAF7F0" opacity="0.55">
-            <animateMotion dur="13s" begin="-6s" repeatCount="indefinite" path="M 180 -50 C 220 260, 140 560, 260 850" />
-          </circle>
-          <circle r="4.5" fill="#D4A84B" opacity="0.8">
-            <animateMotion dur="15s" begin="-2s" repeatCount="indefinite" path="M 920 -50 C 880 260, 960 560, 840 850" />
-          </circle>
-        </g>
-      </svg>
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(212,168,75,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,75,0.05) 1px, transparent 1px)',
-          backgroundSize: '48px 48px',
-        }}
       />
 
-      {/* Gold ambient glow — pulses slowly */}
-      <div
-        className="absolute bottom-0 right-0 w-2/3 h-2/3 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at bottom right, rgba(212,168,75,0.12) 0%, transparent 70%)',
-          animation: 'pulseGlow 7s ease-in-out infinite',
-        }}
-      />
+      {/* Navy gradient overlay — heavier on the left where the text sits */}
+      <div className="absolute inset-0 bg-gradient-to-r from-warm-dark/95 via-warm-dark/65 to-warm-dark/25" />
+      {/* Bottom + top vignette for depth */}
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-warm-dark/70 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-warm-dark/80 to-transparent" />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-16 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
@@ -115,7 +48,6 @@ export default async function HeroSection() {
                 alt="Manchester Law & Technology Initiative"
                 width={52}
                 height={52}
-                className="w-13 h-13"
                 style={{ width: 52, height: 52 }}
               />
             </div>
@@ -145,9 +77,9 @@ export default async function HeroSection() {
             The Fine Print
           </div>
 
-          {/* Tagline — the creative reveal: each word comes into focus, hidden rules becoming legible */}
+          {/* Tagline — word-by-word blur-to-focus: hidden rules becoming legible */}
           <div
-            className="text-xs font-sans uppercase tracking-[0.22em] text-cream/60 mb-9 leading-loose"
+            className="text-xs font-sans uppercase tracking-[0.22em] text-cream/70 mb-9 leading-loose"
             aria-label={s.siteTagline}
           >
             {taglineWords.map((word, i) => (
@@ -211,7 +143,7 @@ export default async function HeroSection() {
           <div
             className="absolute -inset-6 rounded-[2rem] blur-2xl pointer-events-none"
             style={{
-              background: 'linear-gradient(135deg, rgba(212,168,75,0.22) 0%, rgba(196,98,58,0.12) 100%)',
+              background: 'linear-gradient(135deg, rgba(212,168,75,0.25) 0%, rgba(196,98,58,0.12) 100%)',
               animation: 'pulseGlow 6s ease-in-out infinite',
             }}
           />
