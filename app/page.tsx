@@ -1,5 +1,7 @@
 import { getEpisodes, getReflections, getAllGuests, getSiteSettings } from '@/lib/contentful'
 import HeroSection from '@/components/HeroSection'
+import EpisodeCard from '@/components/EpisodeCard'
+import ReflectionCard from '@/components/ReflectionCard'
 import StreamingLinks from '@/components/StreamingLinks'
 import Link from 'next/link'
 
@@ -13,6 +15,11 @@ export default async function HomePage() {
 
   // Public-side: only guests safe to mention by name (announced or published).
   const announcedGuests = guests.filter(g => g.status === 'announced' || g.status === 'published')
+
+  // Featured / archive sections appear automatically once real episodes are published.
+  const latestEpisode    = episodes[0]
+  const latestReflection = reflections[0]
+  const recentEpisodes   = episodes.slice(1)
 
   return (
     <>
@@ -75,6 +82,66 @@ export default async function HomePage() {
           )}
         </div>
       </section>
+
+      {/* ── FEATURED EPISODE — appears automatically once an episode is published ── */}
+      {latestEpisode && (
+        <section className="py-20 lg:py-28 bg-cream">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10">
+            <div className="flex items-end justify-between mb-10">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="h-px w-8 bg-terracotta" />
+                  <span className="text-xs font-sans uppercase tracking-[0.2em] text-terracotta">Latest Episode</span>
+                </div>
+                <h2 className="font-serif text-3xl lg:text-4xl font-bold text-espresso">Featured Episode</h2>
+              </div>
+              <Link href="/episodes" className="hidden sm:inline text-sm text-warm-gray hover:text-terracotta transition-colors">All episodes →</Link>
+            </div>
+            <EpisodeCard episode={latestEpisode} featured />
+          </div>
+        </section>
+      )}
+
+      {/* ── FEATURED ESSAY — appears automatically once a reflection is published ── */}
+      {latestReflection && (
+        <section className="py-20 lg:py-28 bg-beige-light">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10">
+            <div className="flex items-end justify-between mb-10">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="h-px w-8 bg-terracotta" />
+                  <span className="text-xs font-sans uppercase tracking-[0.2em] text-terracotta">Latest Reflection</span>
+                </div>
+                <h2 className="font-serif text-3xl lg:text-4xl font-bold text-espresso">Featured Essay</h2>
+              </div>
+              <Link href="/reflections" className="hidden sm:inline text-sm text-warm-gray hover:text-terracotta transition-colors">All essays →</Link>
+            </div>
+            <ReflectionCard reflection={latestReflection} featured />
+          </div>
+        </section>
+      )}
+
+      {/* ── MORE EPISODES — appears automatically once two or more episodes are live ── */}
+      {episodes.length >= 2 && (
+        <section className="py-20 lg:py-28 bg-cream">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10">
+            <div className="flex items-end justify-between mb-10">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="h-px w-8 bg-terracotta" />
+                  <span className="text-xs font-sans uppercase tracking-[0.2em] text-terracotta">Recent</span>
+                </div>
+                <h2 className="font-serif text-3xl lg:text-4xl font-bold text-espresso">More Episodes</h2>
+              </div>
+              <Link href="/episodes" className="hidden sm:inline text-sm text-warm-gray hover:text-terracotta transition-colors">Browse all →</Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {recentEpisodes.map(ep => <EpisodeCard key={ep.slug} episode={ep} />)}
+            </div>
+          </div>
+        </section>
+      )}
+
 
       {/* ── 3. WHAT WE EXPLORE ───────────────────────────────────────── */}
       <section id="topics" className="py-20 lg:py-28 bg-cream-dark">
