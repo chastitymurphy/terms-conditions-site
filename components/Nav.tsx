@@ -4,15 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { SUBSTACK_URL } from '@/lib/data'
 
-// Pre-launch nav: Resources hidden. Reflections kept for now (will appear when content exists).
-const navLinks = [
-  { href: '/episodes',    label: 'Episodes' },
-  { href: '/reflections', label: 'Reflections' },
-  { href: '/guests',      label: 'Guests' },
-  { href: '/about',       label: 'About' },
-]
-
-export default function Nav() {
+export default function Nav({ showResources = false }: { showResources?: boolean }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen]         = useState(false)
 
@@ -21,6 +13,15 @@ export default function Nav() {
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  // Pre-launch: Resources hidden until toggled on via Contentful → Site Settings → Show Resources.
+  const navLinks = [
+    { href: '/episodes',    label: 'Episodes' },
+    { href: '/reflections', label: 'Reflections' },
+    { href: '/guests',      label: 'Guests' },
+    ...(showResources ? [{ href: '/resources', label: 'Resources' }] : []),
+    { href: '/about',       label: 'About' },
+  ]
 
   return (
     <header
