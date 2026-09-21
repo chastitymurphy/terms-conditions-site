@@ -28,8 +28,7 @@ export default function Footer() {
               <div className="font-sans text-xs uppercase tracking-[0.2em] text-copper mt-0.5">The Fine Print</div>
             </div>
             <p className="text-sm text-beige/65 leading-relaxed max-w-sm">
-              A podcast and publication exploring the hidden rules of economic life.
-              Presented by the University of Manchester. Hosted by {HOST_NAME}.
+              A podcast and publication exploring the hidden rules of economic life. Hosted by {HOST_NAME}.
             </p>
             <div className="mt-5">
               <a
@@ -40,6 +39,15 @@ export default function Footer() {
               >
                 Subscribe on Substack
               </a>
+            </div>
+            <div className="mt-6 flex items-center gap-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/mlti-logo.png" alt="Manchester Law & Technology Initiative" width={34} height={34} className="opacity-85" />
+              <div className="text-xs text-beige/50 leading-snug">
+                Presented by University of Manchester
+                <br />
+                Law &amp; Technology Initiative
+              </div>
             </div>
           </div>
 
