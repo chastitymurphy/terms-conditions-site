@@ -171,6 +171,39 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── PRESENTED BY MLATI — institutional partnership (restrained, editorial) ── */}
+      <section className="mlati-section py-16 lg:py-20 relative overflow-hidden">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-3 gap-10 items-center">
+          <div>
+            <span className="text-xs font-sans uppercase tracking-[0.2em] text-terracotta">Presented by</span>
+            <div className="mt-4 bg-white/80 rounded-xl p-3 inline-block border border-beige/60 shadow-sm">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/mlti-logo.png" alt="Manchester Law & Technology Initiative" width={96} height={96} />
+            </div>
+          </div>
+          <div className="lg:col-span-2">
+            <h2 className="font-serif text-2xl lg:text-3xl font-bold text-espresso mb-4">
+              University of Manchester Law &amp; Technology Initiative
+            </h2>
+            <p className="text-espresso/75 leading-relaxed max-w-2xl mb-3">
+              Terms &amp; Conditions: The Fine Print is presented by the University of Manchester Law &amp; Technology
+              Initiative, connecting research, public education, and conversations about the systems shaping everyday life.
+            </p>
+            <p className="text-espresso/70 leading-relaxed max-w-2xl mb-5 text-sm">
+              From money and technology to law, infrastructure, and power, the collaboration brings questions that often
+              stay inside academic and policy circles into a broader public conversation.
+            </p>
+            <p className="font-sans text-sm font-medium text-espresso/70 mb-5 tracking-wide">
+              Research <span className="text-terracotta mx-1">→</span> Conversation{' '}
+              <span className="text-terracotta mx-1">→</span> Public Understanding
+            </p>
+            <Link href="/about#mlati" className="text-sm font-medium text-terracotta hover:underline">
+              About the partnership →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── 4. WHY THIS PROJECT ───────────────────────────────────────── */}
       <section className="py-20 lg:py-28 bg-warm-dark relative overflow-hidden">
         <div className="absolute inset-0 opacity-10"
