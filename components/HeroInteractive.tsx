@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 
 // Sign & Reveal — the Fine Print as an interaction.
 // Layer 1: Capitol video (untouched) → Layer 2: gradient/vignette →
@@ -202,7 +202,7 @@ export default function HeroInteractive({
                   {
                     offsetPath: `path("${SIG_PATH}")`,
                     animation: 'nibTravel 1.3s linear forwards',
-                  } as React.CSSProperties
+                  } as CSSProperties
                 }
               />
             )}
