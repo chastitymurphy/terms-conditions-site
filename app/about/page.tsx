@@ -46,6 +46,53 @@ export default async function AboutPage() {
             </p>
           </div>
         </section>
+      </div>
+
+      {/* ── Presented by MLATI — full-width editorial institutional section ── */}
+      <section id="mlati" className="mlati-section py-14 lg:py-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-3 gap-10 items-center">
+          <div>
+            <span className="text-xs font-sans uppercase tracking-[0.2em] text-terracotta">Presented by</span>
+            <div className="mt-4 bg-white/80 rounded-xl p-3 inline-block border border-beige/60 shadow-sm">
+              <Image src="/mlti-logo.png" alt="Manchester Law & Technology Initiative" width={110} height={110} />
+            </div>
+          </div>
+          <div className="lg:col-span-2">
+            <h2 className="font-serif text-2xl lg:text-3xl font-bold text-espresso mb-5">
+              University of Manchester Law &amp; Technology Initiative
+            </h2>
+            <div className="text-espresso/80 leading-relaxed space-y-4 max-w-2xl">
+              <p>
+                Terms &amp; Conditions: The Fine Print is presented by the University of Manchester Law &amp; Technology
+                Initiative (MLATI).
+              </p>
+              <p>
+                The collaboration brings together research, public education, and conversations about the systems shaping
+                everyday life—from money and technology to law, infrastructure, power, and the institutions we depend on.
+              </p>
+              <p>
+                Through Terms &amp; Conditions, those questions move beyond academic and policy circles and into
+                conversations designed for a broader public audience: How did these systems get built? Who do they work
+                for? And what could we build differently?
+              </p>
+            </div>
+            <p className="font-sans text-sm font-medium text-espresso/70 my-5 tracking-wide">
+              Research <span className="text-terracotta mx-1">→</span> Conversation{' '}
+              <span className="text-terracotta mx-1">→</span> Public Understanding
+            </p>
+            <a
+              href="https://www.law-tech.manchester.ac.uk/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-terracotta hover:underline"
+            >
+              Learn more about MLATI →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 pb-16 lg:pb-24 pt-16 lg:pt-24 space-y-20">
 
         {/* ── About the Host ──────────────────────────────────────────────────── */}
         <section>
@@ -82,28 +129,6 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        {/* ── University of Manchester ────────────────────────────────────────── */}
-        <section>
-          <div className="flex items-center gap-3 mb-5">
-            <div className="h-px w-8 bg-terracotta" />
-            <span className="text-xs font-sans uppercase tracking-[0.2em] text-terracotta">Affiliation</span>
-          </div>
-          <div className="grid lg:grid-cols-3 gap-10 items-start">
-            <div className="lg:col-span-1">
-              <h2 className="font-serif text-3xl lg:text-4xl font-bold text-espresso mb-3">
-                University of Manchester
-              </h2>
-              <span className="inline-block px-3 py-1 rounded-full bg-beige text-cinnamon text-xs font-sans font-medium uppercase tracking-widest">
-                Presented by
-              </span>
-            </div>
-            <div className="lg:col-span-2">
-              <p className="text-espresso/80 leading-relaxed">
-                {s.aboutUniversity}
-              </p>
-            </div>
-          </div>
-        </section>
 
         {/* ── Pre-launch CTA ───────────────────────────────────────────────────── */}
         <section className="text-center max-w-2xl mx-auto">
