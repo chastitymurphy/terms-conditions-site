@@ -36,6 +36,7 @@ export default function HeroInteractive({
   const [contractGone, setContractGone] = useState(false)
   const [signCount, setSignCount] = useState(0)
   const panelRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const timers = useRef<number[]>([])
 
   const signing = phase === 'signing'
@@ -82,12 +83,30 @@ export default function HeroInteractive({
     if (phase === 'revealed' && panelRef.current) panelRef.current.focus()
   }, [showPanel])
 
+  // Parallax: the video drifts at ~0.4× scroll speed behind the hero content,
+  // so it lags behind the text as you scroll away — the depth effect from the demo.
+  useEffect(() => {
+    const onScroll = () => {
+      const video = videoRef.current
+      if (!video) return
+      const y = window.scrollY
+      if (y < window.innerHeight * 1.6) {
+        video.style.transform = `translateY(${y * 0.4}px) scale(1.12)`
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   const taglineWords = tagline.split(' ').filter(Boolean)
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-warm-dark">
       {/* ── Layer 1: cinematic video background (unchanged) ── */}
       <video
+        ref={videoRef}
+        style={{ willChange: 'transform' }}
         className="absolute inset-0 w-full h-full object-cover"
         src="/hero-bg.mp4"
         autoPlay
