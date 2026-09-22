@@ -6,8 +6,8 @@ import { useEffect, useRef, useState, type ReactNode } from 'react'
 // MaskLine = headline lines slide up from behind an invisible mask (virugroup-style).
 // Reveal = cards/paragraphs fade-slide in. Both fire once when entering the viewport.
 
-function useInView(threshold = 0.2) {
-  const ref = useRef<HTMLSpanElement>(null)
+function useInView<T extends HTMLElement>(threshold = 0.2) {
+  const ref = useRef<T>(null)
   const [inView, setInView] = useState(false)
   useEffect(() => {
     const el = ref.current
@@ -40,7 +40,7 @@ export function MaskLine({
   light?: boolean
   className?: string
 }) {
-  const { ref, inView } = useInView(0.3)
+  const { ref, inView } = useInView<HTMLSpanElement>(0.3)
   return (
     <span ref={ref} className={`mask-line ${inView ? 'in' : ''} ${light ? 'light' : ''} ${className}`}>
       <span className="block" style={{ transitionDelay: `${delay}s` }}>
@@ -59,7 +59,7 @@ export function Reveal({
   delay?: number
   className?: string
 }) {
-  const { ref, inView } = useInView(0.12)
+  const { ref, inView } = useInView<HTMLDivElement>(0.12)
   return (
     <div ref={ref} className={`reveal ${inView ? 'in' : ''} ${className}`} style={{ transitionDelay: `${delay}s` }}>
       {children}
