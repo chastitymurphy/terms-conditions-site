@@ -3,7 +3,54 @@ import HeroSection from '@/components/HeroSection'
 import EpisodeCard from '@/components/EpisodeCard'
 import ReflectionCard from '@/components/ReflectionCard'
 import StreamingLinks from '@/components/StreamingLinks'
+import ZoomSection from '@/components/ZoomSection'
+import { MaskLine, Reveal } from '@/components/Reveal'
 import Link from 'next/link'
+
+// Stepped edge: the upper section's color descends in equal steps into the lower color.
+function StepperEdge({ lowerBg, upperFill }: { lowerBg: string; upperFill: string }) {
+  return (
+    <svg
+      className="block w-full h-[64px]"
+      style={{ background: lowerBg }}
+      viewBox="0 0 1200 64"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M0,0 L1200,0 L1200,11 L1000,11 L1000,22 L800,22 L800,32 L600,32 L600,43 L400,43 L400,53 L0,53 Z"
+        fill={upperFill}
+      />
+    </svg>
+  )
+}
+
+// Case-file section marker (mono, virugroup/zrk style)
+function SectionMarker({ num, label, dark = false }: { num: string; label: string; dark?: boolean }) {
+  return (
+    <div className={`flex items-center gap-3 mb-5 font-mono text-[11px] tracking-[0.12em] ${dark ? 'text-copper' : 'text-terracotta'}`}>
+      <span>{num}</span>
+      <div className={`h-px w-8 ${dark ? 'bg-copper/60' : 'bg-terracotta'}`} />
+      <span>{label}</span>
+    </div>
+  )
+}
+
+const TOPICS = [
+  { num: 'EX. 01', label: 'Money & Payments', desc: 'How money moves, who controls the rails, and what flows beneath every transaction.' },
+  { num: 'EX. 02', label: 'Banking & Public Infrastructure', desc: 'The institutions that hold money and the public systems that govern access to it.' },
+  { num: 'EX. 03', label: 'Technology & AI', desc: 'Algorithms, automation, and artificial intelligence shaping financial and economic life.' },
+  { num: 'EX. 04', label: 'Privacy & Surveillance', desc: 'Data trails, transaction records, and the systems that watch what we do.' },
+  { num: 'EX. 05', label: 'Wealth & Economic Power', desc: 'How wealth is built, distributed, transferred, and blocked.' },
+  { num: 'EX. 06', label: 'Democracy & Public Institutions', desc: 'Governance, public life, and the institutions that shape economic rules.' },
+]
+
+const VIGNETTES = [
+  { num: '01', head: 'A clause everyone skips.', body: "It took four seconds to accept and eleven pages to read. Multiply that by every account, service, and subscription you've ever opened." },
+  { num: '02', head: 'A system nobody designed — out loud.', body: 'Payment rails, credit scores, data brokers. Someone built them, someone profits from them, and almost no one can explain them.' },
+  { num: '03', head: 'A rule you live by without knowing it.', body: "What you're charged, what you're shown, what you're offered — the fine print decided before you arrived." },
+  { num: '04', head: 'A person rewriting it.', body: 'For every hidden system there are researchers, regulators, and builders working to make it legible. Those are the conversations.' },
+]
 
 export default async function HomePage() {
   const [episodes, reflections, guests, settings] = await Promise.all([
@@ -25,25 +72,57 @@ export default async function HomePage() {
     <>
       <HeroSection />
 
-      {/* ── 2. IN PRODUCTION ───────────────────────────────────────────── */}
+      {/* ── // 01 — IN PRODUCTION (with stat strip) ─────────────────────────── */}
       <section className="py-20 lg:py-28 bg-cream">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="h-px w-8 bg-terracotta" />
-            <span className="text-xs font-sans uppercase tracking-[0.2em] text-terracotta">In production</span>
-          </div>
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-espresso mb-4">
-            Conversations already in the works
+          <SectionMarker num="// 01" label="IN PRODUCTION" />
+          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-espresso mb-5 leading-tight">
+            <MaskLine>Conversations already</MaskLine>
+            <MaskLine delay={0.12}>
+              <em className="hl">in the works.</em>
+            </MaskLine>
           </h2>
-          <p className="text-espresso/75 leading-relaxed max-w-3xl mb-12">
-            The first season of Terms &amp; Conditions is already in production. {settings.prelaunchCount} conversations
-            with researchers, policymakers, technologists, advocates, and practitioners will examine the systems
-            beneath everyday economic life — from payments and banking to surveillance, public infrastructure,
-            technology, and economic power.
-          </p>
+          <Reveal>
+            <p className="text-espresso/75 leading-relaxed max-w-3xl mb-2">
+              The first season of Terms &amp; Conditions is already in production.{' '}
+              {settings.prelaunchCount} conversations with researchers, policymakers, technologists,
+              advocates, and practitioners will examine the systems beneath everyday economic life —
+              from payments and banking to surveillance, public infrastructure, technology, and
+              economic power.
+            </p>
+          </Reveal>
+
+          <Reveal className="mt-10">
+            <div className="stat-row">
+              <div className="stat">
+                <div className="num">
+                  0<em>6</em>
+                </div>
+                <div className="lbl">Conversations recorded</div>
+              </div>
+              <div className="stat">
+                <div className="num">
+                  0<em>1</em>
+                </div>
+                <div className="lbl">Season in production</div>
+              </div>
+              <div className="stat">
+                <div className="num">
+                  0<em>0</em>
+                </div>
+                <div className="lbl">Episodes released</div>
+              </div>
+              <div className="stat">
+                <div className="num">
+                  <em>—</em>
+                </div>
+                <div className="lbl">Release date pending</div>
+              </div>
+            </div>
+          </Reveal>
 
           {announcedGuests.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
               {announcedGuests.slice(0, 6).map(guest => (
                 <div key={guest.slug} className="bg-white/70 border border-beige/60 rounded-2xl p-6">
                   <div className="w-12 h-12 rounded-full bg-beige flex items-center justify-center text-lg font-serif font-bold text-espresso mb-4">
@@ -63,22 +142,25 @@ export default async function HomePage() {
               ))}
             </div>
           ) : (
-            <div className="bg-beige-light border border-beige/60 rounded-2xl p-10 max-w-3xl">
-              <p className="font-serif text-2xl text-espresso mb-3 leading-snug">
-                {settings.prelaunchCount} conversations are currently in production.
-              </p>
-              <p className="text-espresso/70 leading-relaxed mb-6">
-                Guest names will be announced as episodes approach release. Subscribe to be notified when the first episode drops.
-              </p>
-              <Link
-                href={settings.substackUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary text-sm"
-              >
-                Subscribe before launch
-              </Link>
-            </div>
+            <Reveal delay={0.15}>
+              <div className="bg-beige-light border border-beige/60 rounded-2xl p-10 max-w-3xl mt-12">
+                <p className="font-serif text-2xl text-espresso mb-3 leading-snug">
+                  {settings.prelaunchCount} conversations are currently in production.
+                </p>
+                <p className="text-espresso/70 leading-relaxed mb-6">
+                  Guest names will be announced as episodes approach release. Subscribe to be notified
+                  when the first episode drops.
+                </p>
+                <Link
+                  href={settings.substackUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary text-sm"
+                >
+                  Subscribe before launch
+                </Link>
+              </div>
+            </Reveal>
           )}
         </div>
       </section>
@@ -142,34 +224,33 @@ export default async function HomePage() {
         </section>
       )}
 
-
-      {/* ── 3. WHAT WE EXPLORE ───────────────────────────────────────── */}
+      {/* ── // 02 — WHAT WE EXPLORE (exhibit cards) ───────────────────────────── */}
       <section id="topics" className="py-20 lg:py-28 bg-cream-dark">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="h-px w-8 bg-terracotta" />
-            <span className="text-xs font-sans uppercase tracking-[0.2em] text-terracotta">Editorial territory</span>
-          </div>
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-espresso mb-10">
-            What we explore
+          <SectionMarker num="// 02" label="EXHIBIT LIST" />
+          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-espresso mb-10 leading-tight">
+            <MaskLine>What we</MaskLine>
+            <MaskLine delay={0.12}>
+              <em className="hl">explore</em>
+            </MaskLine>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              { label: 'Money & Payments',                desc: 'How money moves, who controls the rails, and what flows beneath every transaction.' },
-              { label: 'Banking & Public Infrastructure',  desc: 'The institutions that hold money and the public systems that govern access to it.' },
-              { label: 'Technology & AI',                 desc: 'Algorithms, automation, and artificial intelligence shaping financial and economic life.' },
-              { label: 'Privacy & Surveillance',          desc: 'Data trails, transaction records, and the systems that watch what we do.' },
-              { label: 'Wealth & Economic Power',         desc: 'How wealth is built, distributed, transferred, and blocked.' },
-              { label: 'Democracy & Public Institutions', desc: 'Governance, public life, and the institutions that shape economic rules.' },
-            ].map(topic => (
-              <div key={topic.label} className="bg-white/70 rounded-2xl border border-beige/50 p-6">
-                <h3 className="font-serif text-lg font-bold text-espresso mb-2">{topic.label}</h3>
-                <p className="text-sm text-warm-gray leading-relaxed">{topic.desc}</p>
-              </div>
+            {TOPICS.map((topic, i) => (
+              <Reveal key={topic.label} delay={(i % 3) * 0.1}>
+                <div className="relative bg-white/70 rounded-2xl border border-beige/50 p-6 overflow-hidden h-full hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300">
+                  <div className="absolute top-0 right-0 w-11 h-11 border-t-[1.5px] border-r-[1.5px] border-copper/40 rounded-tr-2xl pointer-events-none" />
+                  <div className="font-mono text-[10.5px] tracking-[0.18em] text-copper mb-4">{topic.num}</div>
+                  <h3 className="font-serif text-lg font-bold text-espresso mb-2">{topic.label}</h3>
+                  <p className="text-sm text-warm-gray leading-relaxed">{topic.desc}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
+
+      {/* ── // 03 — THE THROUGH-LINE (pinned zoom section) ───────────────────── */}
+      <ZoomSection />
 
       {/* ── PRESENTED BY MLATI — institutional partnership (restrained, editorial) ── */}
       <section className="mlati-section py-16 lg:py-20 relative overflow-hidden">
@@ -204,57 +285,60 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 4. WHY THIS PROJECT ───────────────────────────────────────── */}
+      {/* ── // 04 — WHY THIS EXISTS (vignettes) ──────────────────────────────── */}
       <section className="py-20 lg:py-28 bg-warm-dark relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80')", backgroundSize: 'cover', backgroundPosition: 'center' }}
-        />
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="flex items-center gap-3 mb-5">
-              <div className="h-px w-8 bg-copper/60" />
-              <span className="text-xs font-sans uppercase tracking-[0.2em] text-copper/80">Why this project</span>
-            </div>
-            <h2 className="font-serif text-3xl lg:text-4xl xl:text-5xl font-bold text-cream leading-tight mb-6">
-              Understanding the systems that shape economic life
-            </h2>
-            <div className="text-beige/70 leading-relaxed space-y-4">
-              <p>
-                We interact with financial and technological systems every day, often without knowing who designed them,
-                how they work, or whose interests they serve.
-              </p>
-              <p>
-                Terms &amp; Conditions makes those systems legible — through conversations with people who study them,
-                govern them, challenge them, and build alternatives.
-              </p>
-            </div>
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <SectionMarker num="// 04" label="WHY THIS EXISTS" dark />
+          <h2 className="font-serif text-3xl lg:text-5xl font-bold text-cream leading-tight mb-6">
+            <MaskLine light>You signed it.</MaskLine>
+            <MaskLine light delay={0.12}>
+              You never <em className="text-copper italic">read it.</em>
+            </MaskLine>
+          </h2>
+          <Reveal>
+            <p className="text-beige/70 leading-relaxed max-w-2xl mb-6">
+              Every day you agree to terms you never saw — not just on screens, but in the systems
+              that decide what things cost, who gets credit, and whose data is worth keeping. That
+              fine print has authors. This show finds them.
+            </p>
+          </Reveal>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-14 mt-12">
+            {VIGNETTES.map((v, i) => (
+              <Reveal key={v.num} delay={(i % 2) * 0.1}>
+                <div className="flex gap-5 py-6 border-b border-white/10">
+                  <span className="font-mono text-xs text-copper/70 pt-1.5 shrink-0">{v.num}</span>
+                  <div>
+                    <div className="font-serif italic text-xl text-cream mb-2">{v.head}</div>
+                    <p className="text-sm text-beige/60 leading-relaxed">{v.body}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
           </div>
-          <div className="lg:pl-12">
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
-              <div className="font-serif text-xl lg:text-2xl text-cream italic leading-relaxed mb-6">
+
+          <Reveal>
+            <div className="mt-14 max-w-3xl border-l-2 border-terracotta pl-8 py-2">
+              <p className="font-serif italic text-xl lg:text-2xl text-cream leading-relaxed">
                 &ldquo;I understand something about the economy that nobody ever explained to me before.&rdquo;
-              </div>
-              <div className="h-px bg-copper/20 mb-5" />
-              <p className="text-xs text-beige/45 uppercase tracking-widest">A north star for the project</p>
+              </p>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ── 5. HOST ─────────────────────────────────────────────────── */}
+      {/* ── // 05 — THE HOST ─────────────────────────────────────────────────── */}
       <section className="py-20 lg:py-28 bg-cream">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid lg:grid-cols-3 gap-10 items-center">
             <div className="lg:col-span-1 flex justify-center">
               <div className="relative w-40 h-40 lg:w-48 lg:h-48 rounded-2xl overflow-hidden border border-beige">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/chastity-murphy.jpg" alt={settings.hostName} className="w-full h-full object-cover object-top" />
               </div>
             </div>
             <div className="lg:col-span-2">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="h-px w-8 bg-terracotta" />
-                <span className="text-xs font-sans uppercase tracking-[0.2em] text-terracotta">Host</span>
-              </div>
+              <SectionMarker num="// 05" label="THE HOST" />
               <h3 className="font-serif text-2xl lg:text-3xl font-bold text-espresso mb-2">{settings.hostName}</h3>
               <p className="text-sm text-cinnamon font-medium mb-4">{settings.hostTitle}</p>
               <p className="text-espresso/75 leading-relaxed mb-6">
@@ -268,10 +352,11 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 6. NEWSLETTER ───────────────────────────────────────────── */}
+      {/* ── // 06 — NEWSLETTER ────────────────────────────────────────────────── */}
       <section className="py-20 lg:py-28 bg-warm-dark text-cream">
         <div className="max-w-3xl mx-auto px-6 lg:px-10 text-center">
-          <div className="flex items-center justify-center gap-3 mb-5">
+          <div className="flex items-center justify-center gap-3 mb-5 font-mono text-[11px] tracking-[0.12em] text-copper">
+            <span>// 06</span>
             <div className="h-px w-8 bg-copper/50" />
             <span className="text-xs font-sans uppercase tracking-[0.2em] text-copper/80">Newsletter</span>
             <div className="h-px w-8 bg-copper/50" />
@@ -302,7 +387,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 7. FOLLOW / LISTEN (only platforms with real URLs) ────────── */}
+      {/* ── 07. FOLLOW / LISTEN (only platforms with real URLs) ──────────────── */}
       <section className="py-10 bg-cream-dark">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <StreamingLinks settings={settings} />
