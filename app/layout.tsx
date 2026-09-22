@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Metadata } from 'next'
-import { Playfair_Display, Inter } from 'next/font/google'
+import { Playfair_Display, Inter, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -16,6 +16,13 @@ const playfair = Playfair_Display({
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
+})
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-plex-mono',
   display: 'swap',
 })
 
@@ -110,7 +117,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   }
 
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`} style={tokens}>
+    <html lang="en" className={`${playfair.variable} ${inter.variable} ${plexMono.variable}`} style={tokens}>
       <body>
         <script
           type="application/ld+json"
