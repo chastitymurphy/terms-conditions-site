@@ -49,31 +49,80 @@ export default async function AboutPage() {
       </div>
 
       {/* ── Presented by MLATI — full-width editorial institutional section ── */}
-      <section id="mlati" className="mlati-section py-14 lg:py-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-3 gap-10 items-center">
+      <section id="mlati" className="mlati-section py-20 lg:py-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-3 gap-10 items-start">
           <div>
             <span className="text-xs font-sans uppercase tracking-[0.2em] text-terracotta">Presented by</span>
             <div className="mt-4 bg-white/80 rounded-xl p-3 inline-block border border-beige/60 shadow-sm">
-              <Image src="/mlti-logo.png" alt="Manchester Law & Technology Initiative" width={110} height={110} />
+              <Image src="/mlti-logo.png" alt="Manchester Law & Technology Initiative" width={128} height={128} />
             </div>
           </div>
           <div className="lg:col-span-2">
-            <h2 className="font-serif text-2xl lg:text-3xl font-bold text-espresso mb-5">
+            <h2 className="font-serif text-2xl lg:text-3xl font-bold text-espresso mb-3">
               University of Manchester Law &amp; Technology Initiative
             </h2>
+            <p className="font-serif italic text-lg lg:text-xl text-espresso mb-6">
+              Where law, technology, and public infrastructure meet.
+            </p>
             <div className="text-espresso/80 leading-relaxed space-y-4 max-w-2xl">
               <p>
-                Terms &amp; Conditions: The Fine Print is presented by the University of Manchester Law &amp; Technology
-                Initiative (MLATI).
+                The Manchester Law &amp; Technology Initiative explores how technological change is reshaping the laws,
+                institutions, and infrastructure that organize everyday life.
               </p>
               <p>
-                The collaboration brings together research, public education, and conversations about the systems shaping
-                everyday life—from money and technology to law, infrastructure, power, and the institutions we depend on.
+                Its work examines questions at the intersection of technology, regulation, public systems, and
+                institutional design — from the future of money and payments to artificial intelligence, privacy, data,
+                and digital infrastructure.
               </p>
               <p>
-                Through Terms &amp; Conditions, those questions move beyond academic and policy circles and into
-                conversations designed for a broader public audience: How did these systems get built? Who do they work
-                for? And what could we build differently?
+                <em>Terms &amp; Conditions: The Fine Print</em> brings those questions into a broader public conversation.
+                The show begins with the systems people encounter every day and asks what sits underneath them:{' '}
+                <strong>How did these systems get built? Who do they work for? And what could we build differently?</strong>
+              </p>
+            </div>
+
+            {/* Thematic closing */}
+            <p className="font-sans text-base lg:text-lg font-semibold uppercase tracking-[0.25em] text-espresso mt-8 mb-2">
+              Law <span className="text-copper">×</span> Technology <span className="text-copper">×</span> Public Life
+            </p>
+
+            {/* Questions we're exploring */}
+            <div className="mt-8 mb-8 max-w-2xl">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="h-px w-8 bg-terracotta" />
+                <span className="text-xs font-sans uppercase tracking-[0.2em] text-terracotta">
+                  Questions we&rsquo;re exploring
+                </span>
+              </div>
+              <ol className="border-b border-beige/70">
+                {[
+                  'What should count as public infrastructure in a digital economy?',
+                  'Who should control the systems through which money moves?',
+                  'Can technology expand access without expanding surveillance?',
+                  'How do we build technological systems around public values rather than adding protections after the fact?',
+                ].map((q, i) => (
+                  <li
+                    key={q}
+                    className="flex items-baseline gap-4 py-4 border-t border-beige/70"
+                  >
+                    <span className="font-mono text-xs text-copper shrink-0">0{i + 1}</span>
+                    <span className="font-serif text-lg leading-snug text-espresso">{q}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            {/* Why the partnership */}
+            <h3 className="font-serif text-xl lg:text-2xl font-bold text-espresso mb-3">Why the partnership?</h3>
+            <div className="text-espresso/80 leading-relaxed space-y-4 max-w-2xl">
+              <p>
+                Many consequential debates about technology, money, regulation, and public infrastructure begin inside
+                universities, government institutions, and technical communities long before most people encounter their
+                consequences.
+              </p>
+              <p>
+                <em>Terms &amp; Conditions</em> creates a bridge between those conversations and public life — taking the
+                questions seriously without requiring listeners to be specialists to understand why they matter.
               </p>
             </div>
             <p className="font-sans text-sm font-medium text-espresso/70 my-5 tracking-wide">
@@ -86,7 +135,7 @@ export default async function AboutPage() {
               rel="noopener noreferrer"
               className="text-sm font-medium text-terracotta hover:underline"
             >
-              Learn more about MLATI →
+              Explore the Manchester Law &amp; Technology Initiative ↗
             </a>
           </div>
         </div>
@@ -125,6 +174,9 @@ export default async function AboutPage() {
                   </p>
                 </>
               )}
+              <p className="font-sans text-xs uppercase tracking-[0.25em] text-espresso/60 mt-6">
+                Money <span className="text-copper">×</span> Technology <span className="text-copper">×</span> Public Infrastructure <span className="text-copper">×</span> Economic Power
+              </p>
             </div>
           </div>
         </section>
