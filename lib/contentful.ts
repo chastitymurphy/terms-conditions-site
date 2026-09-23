@@ -9,7 +9,7 @@ const PREVIEW_ALLOWED = process.env.VERCEL_ENV !== 'production' && Boolean(PREVI
 const BASE = `https://cdn.contentful.com/spaces/${SPACE}/environments/master`
 const PREVIEW_BASE = `https://preview.contentful.com/spaces/${SPACE}/environments/master`
 
-async function fetchEntries(contentType: string, extra = '', includeDrafts = false) {
+async function fetchEntries(contentType: string, extra = '', includeDrafts = false): Promise<any[]> {
   const usePreview = includeDrafts && PREVIEW_ALLOWED
   const res = await fetch(
     `${usePreview ? PREVIEW_BASE : BASE}/entries?content_type=${contentType}&limit=100${extra}`,
