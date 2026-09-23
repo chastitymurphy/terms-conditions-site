@@ -3,6 +3,7 @@ import { MaskLine, Reveal } from '@/components/Reveal'
 import EpisodeCard from '@/components/EpisodeCard'
 import NewsletterCTA from '@/components/NewsletterCTA'
 import StreamingLinks from '@/components/StreamingLinks'
+import { DUMMY_EPISODE } from '@/lib/dummy-episode'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -31,7 +32,14 @@ function StepperEdge({ lowerBg, upperFill }: { lowerBg: string; upperFill: strin
 const TEASERS = [1, 2, 3, 4, 5, 6]
 
 export default async function EpisodesPage() {
-  const [episodes, settings] = await Promise.all([getEpisodes(), getSiteSettings()])
+  const [fetched, settings] = await Promise.all([getEpisodes(), getSiteSettings()])
+  // Template demo episode appears ONLY on preview/development deployments —
+  // never on production. Delete once the template has been approved.
+  const isPreviewBuild = process.env.VERCEL_ENV !== 'production'
+  const episodes =
+    isPreviewBuild && !fetched.some((e) => e.slug === DUMMY_EPISODE.slug)
+      ? [DUMMY_EPISODE, ...fetched]
+      : fetched
 
   return (
     <>
