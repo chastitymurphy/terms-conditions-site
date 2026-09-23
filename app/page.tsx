@@ -263,21 +263,34 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="lg:col-span-2">
-            <h2 className="font-serif text-2xl lg:text-3xl font-bold text-espresso mb-4">
+            <h2 className="font-serif text-2xl lg:text-3xl font-bold text-espresso mb-3">
               University of Manchester Law &amp; Technology Initiative
             </h2>
-            <p className="text-espresso/75 leading-relaxed max-w-2xl mb-3">
-              Terms &amp; Conditions: The Fine Print is presented by the University of Manchester Law &amp; Technology
-              Initiative, connecting research, public education, and conversations about the systems shaping everyday life.
+            <p className="font-serif italic text-xl lg:text-2xl text-espresso/90 leading-snug mb-6">
+              Where law, technology, and public infrastructure meet.
             </p>
-            <p className="text-espresso/70 leading-relaxed max-w-2xl mb-5 text-sm">
-              From money and technology to law, infrastructure, and power, the collaboration brings questions that often
-              stay inside academic and policy circles into a broader public conversation.
-            </p>
-            <p className="font-sans text-sm font-medium text-espresso/70 mb-5 tracking-wide">
-              Research <span className="text-terracotta mx-1">→</span> Conversation{' '}
-              <span className="text-terracotta mx-1">→</span> Public Understanding
-            </p>
+            <div className="text-espresso/75 leading-relaxed max-w-2xl space-y-4 text-[15px]">
+              <p>
+                The Manchester Law &amp; Technology Initiative brings together research and ideas about how
+                technology is reshaping the laws, institutions, and infrastructure that organize everyday life.
+              </p>
+              <p>
+                Its work explores emerging questions around technology, regulation, public systems, and the
+                future of money—including how digital infrastructure can be designed to serve the public interest.
+              </p>
+              <p>
+                Terms &amp; Conditions: The Fine Print brings those questions into a broader public
+                conversation—asking how the systems behind money, technology, infrastructure, and economic life
+                actually work, who they serve, and what we might build differently.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-sans text-sm font-semibold tracking-[0.18em] text-espresso/80 my-6">
+              <Reveal delay={0}><span>LAW</span></Reveal>
+              <Reveal delay={0.12}><span className="text-copper">×</span></Reveal>
+              <Reveal delay={0.24}><span>TECHNOLOGY</span></Reveal>
+              <Reveal delay={0.36}><span className="text-copper">×</span></Reveal>
+              <Reveal delay={0.48}><span>PUBLIC LIFE</span></Reveal>
+            </div>
             <Link href="/about#mlati" className="text-sm font-medium text-terracotta hover:underline">
               About the partnership →
             </Link>
