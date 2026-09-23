@@ -89,7 +89,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-beige/35">
           <span>© {year} {PODCAST_TITLE}</span>
-          <span>Presented by the University of Manchester</span>
+          <span>Presented by University of Manchester Law &amp; Technology Initiative</span>
         </div>
       </div>
     </footer>
