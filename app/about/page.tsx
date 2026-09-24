@@ -30,34 +30,32 @@ function StepperEdge({ lowerBg, upperFill }: { lowerBg: string; upperFill: strin
 
 const GHOST_WORDS = ['TERMS', 'SYSTEMS', 'POWER', 'PUBLIC LIFE']
 
-const QUESTIONS = [
-  'What should count as public infrastructure in a digital economy?',
-  'Who should control the systems through which money moves?',
-  'Can technology expand access without expanding surveillance?',
-  'What happens when private infrastructure begins governing public life?',
-  'How do we build systems around public values instead of adding protections after the fact?',
-]
-
+// Documentary/editorial imagery — each block gets its own visual world.
+// The hero's Capitol still is deliberately NOT reused here.
 const BLOCKS = [
   {
     label: 'Conversation',
     copy: 'Long-form interviews with policymakers, researchers, organizers, technologists, artists, and practitioners.',
-    image: '/about-infra-2.jpg',
+    image: '/about-conversation.jpg',
+    alt: 'Hands gesturing during a conversation across a table with notebooks and a laptop',
   },
   {
     label: 'Explanation',
     copy: 'Clear, accessible breakdowns of complicated systems without flattening their complexity.',
     image: null as string | null,
+    alt: '',
   },
   {
     label: 'Research',
     copy: 'Ideas emerging from law, economics, technology, public infrastructure, and political economy.',
-    image: '/about-infra-3.jpg',
+    image: '/about-research.jpg',
+    alt: 'A hand working through annotated papers and notes at a desk',
   },
   {
     label: 'Public life',
     copy: 'Connecting technical debates to the consequences people experience in everyday life.',
-    image: null as string | null,
+    image: '/about-public-life.jpg',
+    alt: 'People moving through a busy city street among taxis and transit',
   },
 ]
 
@@ -69,30 +67,12 @@ const VALUES = [
   { term: 'Accountability', copy: 'Examine not only what institutions intend, but what their systems actually produce.' },
 ]
 
-function Times({ items }: { items: string[] }) {
-  return (
-    <>
-      {items.map((word, i) => (
-        <span key={word} className="whitespace-nowrap">
-          {i > 0 && <span className="text-copper mx-2 sm:mx-3">×</span>}
-          {word}
-        </span>
-      ))}
-    </>
-  )
-}
-
 export default async function AboutPage() {
   const s = await getSiteSettings()
 
-  // Condense the CMS long bio to 2–3 paragraphs: merge the middle paragraphs
-  // when the entry carries more than three (host section sits lower on the
-  // page and should read as "who is guiding the conversation", not a CV).
-  const paras = (s.aboutHostLong || '').split(/\n\n+/).map((p) => p.trim()).filter(Boolean)
-  const bioParas =
-    paras.length > 3
-      ? [paras[0], paras.slice(1, -1).join(' '), paras[paras.length - 1]]
-      : paras
+  // Host bio comes from the CMS (aboutHostLong). Render paragraphs as-is;
+  // the entry carries the tightened 2-paragraph editorial bio.
+  const bioParas = (s.aboutHostLong || '').split(/\n\n+/).map((p) => p.trim()).filter(Boolean)
 
   return (
     <>
@@ -151,7 +131,7 @@ export default async function AboutPage() {
       <StepperEdge lowerBg="#FAF7F0" upperFill="#2B3A52" />
 
       {/* ── 2. Platform statement — the manifesto ───────────────────────────── */}
-      <section className="py-20 lg:py-32 bg-cream">
+      <section className="py-20 lg:py-28 bg-cream">
         <div className="max-w-5xl mx-auto px-6 lg:px-10 text-center">
           <h2 className="font-serif text-5xl lg:text-7xl font-bold text-espresso leading-[1.02] mb-10">
             <MaskLine>Every system</MaskLine>
@@ -169,7 +149,7 @@ export default async function AboutPage() {
             <p className="text-espresso font-medium text-lg mt-6">Terms &amp; Conditions makes those systems visible.</p>
           </Reveal>
 
-          <div className="mt-14 max-w-3xl mx-auto text-left">
+          <div className="mt-12 max-w-3xl mx-auto text-left">
             <Reveal>
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-terracotta mb-6">It asks:</p>
             </Reveal>
@@ -185,8 +165,8 @@ export default async function AboutPage() {
       </section>
 
       {/* ── 3. What the platform does — alternating editorial blocks ────────── */}
-      <section className="pb-20 lg:pb-32 bg-cream">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 space-y-16 lg:space-y-24">
+      <section className="pb-20 lg:pb-28 bg-cream">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 space-y-16 lg:space-y-20">
           {BLOCKS.map((b, i) => (
             <div key={b.label} className={`grid lg:grid-cols-12 gap-10 items-center`}>
               <div className={`lg:col-span-5 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
@@ -205,7 +185,7 @@ export default async function AboutPage() {
                 {b.image ? (
                   <Parallax speed={0.06}>
                     <div className="rounded-2xl overflow-hidden shadow-lg border border-beige">
-                      <Image src={b.image} alt={b.label} width={1200} height={800} className="w-full h-auto" />
+                      <Image src={b.image} alt={b.alt} width={1200} height={800} className="w-full h-auto" />
                     </div>
                   </Parallax>
                 ) : (
@@ -226,48 +206,18 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <StepperEdge lowerBg="#2B3A52" upperFill="#FAF7F0" />
-
-      {/* ── 4. The questions we keep asking ─────────────────────────────────── */}
-      <section className="py-20 lg:py-28 bg-espresso relative overflow-hidden">
-        <div className="max-w-5xl mx-auto px-6 lg:px-10">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="font-mono text-[11px] tracking-[0.12em] text-copper">// Q</span>
-            <div className="h-px w-8 bg-copper/60" />
-            <span className="font-mono text-[11px] tracking-[0.12em] text-copper">THE QUESTIONS WE KEEP ASKING</span>
-          </div>
-          <div className="border-b border-white/10">
-            {QUESTIONS.map((q, i) => (
-              <Parallax key={q} speed={0.03 + i * 0.008}>
-                <div className="flex items-baseline gap-6 lg:gap-10 py-8 lg:py-10 border-t border-white/10">
-                  <span className="font-mono text-copper text-lg shrink-0">0{i + 1}</span>
-                  <p className="font-serif text-2xl lg:text-4xl font-bold text-cream leading-snug">
-                    <Reveal>{q}</Reveal>
-                  </p>
-                </div>
-              </Parallax>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <StepperEdge lowerBg="#FAF7F0" upperFill="#2B3A52" />
-
-      {/* ── 5. Manchester / MLATI — institutional partnership ────────────────── */}
-      <section id="mlati" className="mlati-section py-20 lg:py-28">
+      {/* ── 4. Manchester / MLATI — institutional partnership ────────────────── */}
+      <section id="mlati" className="mlati-section py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12 items-start">
-          {/* Left: logo + layered institutional image */}
+          {/* Left: logo + institutional image */}
           <div className="lg:col-span-4">
             <div className="flex items-center gap-3 mb-5">
               <div className="h-px w-8 bg-terracotta" />
               <span className="text-xs font-sans uppercase tracking-[0.2em] text-terracotta">Presented by</span>
             </div>
             <Parallax speed={0.07}>
-              <div className="relative">
-                <div className="absolute -top-4 -right-4 w-40 h-40 rounded-2xl bg-espresso/90 -z-0" aria-hidden="true" />
-                <div className="relative bg-white/90 rounded-xl p-4 inline-block border border-beige/60 shadow-sm">
-                  <Image src="/mlti-logo.png" alt="Manchester Law & Technology Initiative" width={128} height={128} />
-                </div>
+              <div className="relative bg-white/90 rounded-xl p-4 inline-block border border-beige/60 shadow-sm">
+                <Image src="/mlti-logo.png" alt="Manchester Law & Technology Initiative" width={128} height={128} />
               </div>
             </Parallax>
             <Parallax speed={0.04}>
@@ -279,9 +229,9 @@ export default async function AboutPage() {
 
           {/* Right: the partnership story */}
           <div className="lg:col-span-8">
-            <h2 className="font-serif text-3xl lg:text-5xl font-bold text-espresso uppercase tracking-wide leading-tight mb-6">
+            <h2 className="font-serif text-3xl lg:text-5xl font-bold text-espresso uppercase tracking-wide leading-tight mb-4">
               <MaskLine>
-                Where <span className="text-copper">×</span> Law <span className="text-copper">×</span> Technology{' '}
+                Where Law <span className="text-copper">×</span> Technology{' '}
                 <span className="text-copper">×</span> Public Life Meet
               </MaskLine>
             </h2>
@@ -289,19 +239,33 @@ export default async function AboutPage() {
             <div className="text-espresso/80 leading-relaxed space-y-4 max-w-2xl">
               <Reveal>
                 <p>
-                  <em>Where law, technology, and public infrastructure meet.</em> The Manchester Law &amp; Technology
-                  Initiative explores how technological change is reshaping the laws, institutions, and infrastructure
-                  that organize everyday life.
+                  The Manchester Law &amp; Technology Initiative explores how technological change is reshaping the
+                  laws, institutions, and infrastructure that organize everyday life. Its work brings together
+                  questions of technology, regulation, institutional design, and the public interest — from the
+                  future of money and payments to artificial intelligence, privacy, data, and digital infrastructure.
                 </p>
               </Reveal>
-              <Reveal delay={0.08}>
+              <Reveal delay={0.06}>
                 <p>
-                  Terms &amp; Conditions translates questions being explored across research, government, technology,
-                  and public institutions into a broader public conversation.
+                  At the center of that work is a broader question: how should new technologies be governed, who
+                  should they serve, and what kinds of institutions do we need around them? That means looking
+                  beyond what technology can do to examine the systems of ownership, rules, rights, and public
+                  capacity that determine how it is actually experienced.
+                </p>
+              </Reveal>
+              <Reveal delay={0.12}>
+                <p>
+                  <em>Terms &amp; Conditions: The Fine Print</em> extends those questions into public conversation.
+                  The show starts with the systems people encounter every day — how money moves, how technology
+                  makes decisions, who controls essential infrastructure — and works backward to uncover the rules
+                  and institutions underneath them.
                 </p>
               </Reveal>
             </div>
-            <p className="font-sans text-sm font-medium text-espresso/70 my-6 tracking-wide">
+            <p className="font-sans text-base lg:text-lg font-semibold uppercase tracking-[0.25em] text-espresso mt-8 mb-2">
+              Law <span className="text-copper">×</span> Technology <span className="text-copper">×</span> Public Life
+            </p>
+            <p className="font-sans text-sm font-medium text-espresso/70 my-5 tracking-wide">
               Research <span className="text-terracotta mx-1">→</span> Conversation{' '}
               <span className="text-terracotta mx-1">→</span> Public Understanding
             </p>
@@ -317,8 +281,8 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ── 6. How we approach the work — editorial commitments ─────────────── */}
-      <section className="py-20 lg:py-28 bg-sand">
+      {/* ── 5. How we approach the work — editorial commitments ─────────────── */}
+      <section className="py-20 lg:py-24 bg-sand">
         <div className="max-w-5xl mx-auto px-6 lg:px-10">
           <div className="flex items-center gap-3 mb-5">
             <div className="h-px w-8 bg-terracotta" />
@@ -343,21 +307,21 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ── 7. The host — lower on the page, layered treatment ──────────────── */}
-      <section className="py-20 lg:py-28 bg-cream">
+      {/* ── 6. The host — restrained editorial profile ──────────────────────── */}
+      <section className="py-20 lg:py-24 bg-cream">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex items-center gap-3 mb-10">
+          <div className="flex items-center gap-3 mb-8">
             <div className="h-px w-8 bg-terracotta" />
             <span className="text-xs font-sans uppercase tracking-[0.2em] text-terracotta">
               Hosted by Chastity Murphy
             </span>
           </div>
-          <div className="grid lg:grid-cols-12 gap-12 items-start">
-            {/* Layered portrait card */}
-            <div className="lg:col-span-5">
+          <div className="grid lg:grid-cols-12 gap-10 items-center">
+            {/* Portrait — prominent but not dominating */}
+            <div className="lg:col-span-4">
               <Parallax speed={0.07}>
-                <div className="relative max-w-sm mx-auto lg:mx-0">
-                  <div aria-hidden="true" className="absolute -top-5 -left-5 w-full h-full rounded-2xl bg-espresso" />
+                <div className="relative max-w-[19rem] mx-auto lg:mx-0">
+                  <div aria-hidden="true" className="absolute -top-4 -left-4 w-full h-full rounded-2xl bg-espresso" />
                   <div className="relative rounded-2xl overflow-hidden border-4 border-cream shadow-xl">
                     <Image
                       src="/chastity-murphy.jpg"
@@ -367,16 +331,16 @@ export default async function AboutPage() {
                       className="w-full h-auto object-cover"
                     />
                   </div>
-                  <div aria-hidden="true" className="absolute -bottom-3 -right-3 w-24 h-px bg-copper" />
-                  <div aria-hidden="true" className="absolute -bottom-3 -right-3 w-px h-24 bg-copper" />
+                  <div aria-hidden="true" className="absolute -bottom-3 -right-3 w-20 h-px bg-copper" />
+                  <div aria-hidden="true" className="absolute -bottom-3 -right-3 w-px h-20 bg-copper" />
                 </div>
               </Parallax>
             </div>
 
             {/* Who is guiding the conversation */}
-            <div className="lg:col-span-7">
-              <h2 className="font-serif text-4xl lg:text-5xl font-bold text-espresso mb-3">{s.hostName}</h2>
-              <p className="font-serif italic text-lg text-cinnamon mb-8">
+            <div className="lg:col-span-8">
+              <h2 className="font-serif text-3xl lg:text-4xl font-bold text-espresso mb-2">{s.hostName}</h2>
+              <p className="font-serif italic text-lg text-cinnamon mb-6">
                 Policy strategist, researcher &amp; former U.S. Treasury advisor
               </p>
               <div className="text-espresso/80 leading-relaxed space-y-4 max-w-xl">
@@ -386,7 +350,7 @@ export default async function AboutPage() {
                   </Reveal>
                 ))}
               </div>
-              <p className="font-sans text-xs uppercase tracking-[0.25em] text-espresso/60 mt-10">
+              <p className="font-sans text-xs uppercase tracking-[0.25em] text-espresso/60 mt-8">
                 Money <span className="text-copper">×</span> Technology <span className="text-copper">×</span> Public Infrastructure <span className="text-copper">×</span> Economic Power
               </p>
             </div>
@@ -399,7 +363,7 @@ export default async function AboutPage() {
       <PeopleGrid people={[]} />
 
       {/* ── Subscribe ────────────────────────────────────────────────────────── */}
-      <section className="py-20 bg-sand text-center">
+      <section className="py-16 lg:py-20 bg-sand text-center">
         <div className="max-w-2xl mx-auto px-6 lg:px-10">
           <div className="h-px w-8 bg-terracotta mx-auto mb-6" />
           <p className="font-serif text-2xl text-espresso mb-4">
