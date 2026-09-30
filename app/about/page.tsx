@@ -31,31 +31,30 @@ function StepperEdge({ lowerBg, upperFill }: { lowerBg: string; upperFill: strin
 const GHOST_WORDS = ['TERMS', 'SYSTEMS', 'POWER', 'PUBLIC LIFE']
 
 // Documentary/editorial imagery — each block gets its own visual world.
-// The hero's Capitol still is deliberately NOT reused here.
 const BLOCKS = [
   {
     label: 'Conversation',
     copy: 'Long-form interviews with policymakers, researchers, organizers, technologists, artists, and practitioners.',
     image: '/about-conversation.jpg',
-    alt: 'Hands gesturing during a conversation across a table with notebooks and a laptop',
+    alt: 'People in discussion around a table with notebooks, seen in soft daylight',
   },
   {
     label: 'Explanation',
     copy: 'Clear, accessible breakdowns of complicated systems without flattening their complexity.',
-    image: null as string | null,
-    alt: '',
+    image: '/about-explanation.jpg',
+    alt: 'A fountain pen resting on a handwritten page, shadow falling across the lines',
   },
   {
     label: 'Research',
     copy: 'Ideas emerging from law, economics, technology, public infrastructure, and political economy.',
     image: '/about-research.jpg',
-    alt: 'A hand working through annotated papers and notes at a desk',
+    alt: 'Floor-to-ceiling shelves of well-worn books in an archive',
   },
   {
     label: 'Public life',
     copy: 'Connecting technical debates to the consequences people experience in everyday life.',
     image: '/about-public-life.jpg',
-    alt: 'People moving through a busy city street among taxis and transit',
+    alt: 'A customer completing a payment at a shop counter',
   },
 ]
 
@@ -76,19 +75,32 @@ export default async function AboutPage() {
 
   return (
     <>
-      {/* ── 1. Hero — layered editorial opening ─────────────────────────────── */}
+      {/* ── 1. Hero — full-bleed cinematic editorial opening ────────────────── */}
       <header className="relative bg-espresso overflow-hidden">
-        {/* Ghost background typography — moves slower than the foreground */}
-        <Parallax speed={0.22} className="absolute inset-0 flex items-center pointer-events-none" >
-          <div aria-hidden="true" className="font-serif font-bold text-cream/[0.05] leading-[0.95] select-none break-words text-[22vw] px-4">
+        {/* Background image becomes part of the hero itself — moves slower than the foreground */}
+        <Parallax speed={0.18} className="absolute -inset-y-[12%] inset-x-0 pointer-events-none">
+          <Image
+            src="/about-hero-bg.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+        </Parallax>
+        {/* Navy overlay for readability */}
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-espresso/80 via-espresso/65 to-espresso/95" />
+
+        {/* Ghost background typography — drifts more slowly than everything */}
+        <Parallax speed={0.3} className="absolute inset-0 flex items-center pointer-events-none">
+          <div aria-hidden="true" className="font-serif font-bold text-cream/[0.06] leading-[0.95] select-none break-words text-[22vw] px-4">
             {GHOST_WORDS.map((w) => (
               <div key={w}>{w}</div>
             ))}
           </div>
         </Parallax>
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-36 pb-24 grid lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-7">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-40 pb-32">
+          <div className="max-w-2xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="h-px w-8 bg-copper/60" />
               <span className="text-xs font-sans uppercase tracking-[0.2em] text-copper/80">The Platform</span>
@@ -100,30 +112,11 @@ export default async function AboutPage() {
               </MaskLine>
             </h1>
             <Reveal delay={0.15}>
-              <p className="font-serif italic text-lg lg:text-xl text-beige/80 max-w-xl leading-relaxed">
+              <p className="font-serif italic text-lg lg:text-xl text-beige/80 leading-relaxed">
                 Terms &amp; Conditions examines the systems, technologies, institutions, and agreements that
                 shape how we live — and asks who designed them, who benefits, and what could be built differently.
               </p>
             </Reveal>
-          </div>
-
-          {/* Overlapping editorial image card — shifts subtly against the card */}
-          <div className="lg:col-span-5 relative">
-            <Parallax speed={0.08}>
-              <div className="relative rounded-2xl overflow-hidden border border-copper/30 shadow-2xl rotate-1">
-                <Image
-                  src="/about-infra-1.jpg"
-                  alt="Institutional buildings at dusk with drifting documents and golden network lines"
-                  width={1200}
-                  height={800}
-                  className="w-full h-auto"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-espresso/50 to-transparent" />
-                <div className="absolute bottom-4 left-4 font-mono text-[10px] uppercase tracking-[0.2em] text-cream/80">
-                  EXHIBIT A — EVERYDAY ECONOMIC LIFE
-                </div>
-              </div>
-            </Parallax>
           </div>
         </div>
       </header>
@@ -183,7 +176,7 @@ export default async function AboutPage() {
               </div>
               <div className={`lg:col-span-7 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
                 {b.image ? (
-                  <Parallax speed={0.06}>
+                  <Parallax speed={0.05 + (i % 2) * 0.04}>
                     <div className="rounded-2xl overflow-hidden shadow-lg border border-beige">
                       <Image src={b.image} alt={b.alt} width={1200} height={800} className="w-full h-auto" />
                     </div>
