@@ -217,11 +217,6 @@ export default async function AboutPage() {
                 className="drop-shadow-sm"
               />
             </Parallax>
-            <Parallax speed={0.04}>
-              <div className="mt-6 rounded-2xl overflow-hidden border border-beige shadow-md">
-                <Image src="/about-infra-1.jpg" alt="" width={900} height={600} className="w-full h-auto" />
-              </div>
-            </Parallax>
           </div>
 
           {/* Right: the partnership story */}
