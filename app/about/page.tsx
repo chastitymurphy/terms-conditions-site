@@ -162,7 +162,7 @@ export default async function AboutPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10 space-y-16 lg:space-y-20">
           {BLOCKS.map((b, i) => (
             <div key={b.label} className={`grid lg:grid-cols-12 gap-10 items-center`}>
-              <div className={`lg:col-span-5 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+              <div className={`lg:col-span-6 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
                 <div className="flex items-center gap-3 mb-4">
                   <span className="font-mono text-[11px] tracking-[0.12em] text-terracotta">0{i + 1}</span>
                   <div className="h-px w-8 bg-terracotta" />
@@ -174,7 +174,7 @@ export default async function AboutPage() {
                   <p className="text-espresso/75 text-lg leading-relaxed max-w-md">{b.copy}</p>
                 </Reveal>
               </div>
-              <div className={`lg:col-span-7 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+              <div className={`lg:col-span-6 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
                 {b.image ? (
                   <Parallax speed={0.05 + (i % 2) * 0.04}>
                     <div className="rounded-2xl overflow-hidden shadow-lg border border-beige">
@@ -209,9 +209,13 @@ export default async function AboutPage() {
               <span className="text-xs font-sans uppercase tracking-[0.2em] text-terracotta">Presented by</span>
             </div>
             <Parallax speed={0.07}>
-              <div className="relative bg-white/90 rounded-xl p-4 inline-block border border-beige/60 shadow-sm">
-                <Image src="/mlti-logo.png" alt="Manchester Law & Technology Initiative" width={128} height={128} />
-              </div>
+              <Image
+                src="/mlti-logo.png"
+                alt="Manchester Law & Technology Initiative"
+                width={190}
+                height={190}
+                className="drop-shadow-sm"
+              />
             </Parallax>
             <Parallax speed={0.04}>
               <div className="mt-6 rounded-2xl overflow-hidden border border-beige shadow-md">
@@ -224,8 +228,9 @@ export default async function AboutPage() {
           <div className="lg:col-span-8">
             <h2 className="font-serif text-3xl lg:text-5xl font-bold text-espresso uppercase tracking-wide leading-tight mb-4">
               <MaskLine>
-                Where Law <span className="text-copper">×</span> Technology{' '}
-                <span className="text-copper">×</span> Public Life Meet
+                Where <span className="text-terracotta">Law</span>{' '}
+                <span className="text-copper">×</span> <span className="text-terracotta">Technology</span>{' '}
+                <span className="text-copper">×</span> <span className="text-terracotta">Public Life</span> Meet
               </MaskLine>
             </h2>
             <p className="font-serif italic text-xl text-espresso/90 mb-6">University of Manchester Law &amp; Technology Initiative</p>
